@@ -1,5 +1,5 @@
 class Cards:
-    __name = ""
-    __origin = ""
-    __health = ""
-    __damage = ""
+    __name = "Thor"
+    __origin = "Viking"
+    __health = "10"
+    __damage = "5"
