@@ -3,15 +3,15 @@ from tkinter import *
 from tkinter.ttk import *
 
 # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
-
 w = tk.Tk()
 w.title("Game_name")
 w.geometry("1200x700")
 
+
 def updateCards():
     for i in range(10):
         stringHolder = "cardHolder" + str(i)
-        stringHolder = tk.Button(w, width=15, height=10,text=("Card "+str(i)))
+        stringHolder = tk.Button(w, width=15, height=10, text=("Card " + str(i)))
         stringHolder.config(bg='lightgreen')
 
         if (i < 5):
