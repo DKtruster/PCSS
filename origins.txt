@@ -1,2 +1,2 @@
-[[Thor], [Viking], [10],[ 5]]
-[[Caesar],[Roman],[8],[6]]
+[[Thor] [Viking] [10] [5]]
+[[Caesar] [Roman] [8] [6]]

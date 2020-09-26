@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
+
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
     w = tk.Tk()
