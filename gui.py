@@ -11,6 +11,9 @@ bg1 = Image.open("backgroundBoard.jpg")
 bgPT = ImageTk.PhotoImage(bg1)
 label = Label(image=bgPT)
 
+textBut = Image.open("testButtonTexture.jpg")
+textButPT = ImageTk.PhotoImage(textBut)
+textButPTL = Label(image=textButPT)
 
 runCheck = False
 
@@ -35,10 +38,10 @@ class displayGUI():
             stringHolder = tk.Button(w, width=35, height=5, text=("Card " + str(i)))
             stringHolder.config(bg='lightgreen')
 
-            stringHolder.place(relx=1, x=-1120, y=120+(i * 90), anchor=NW)
+            stringHolder.place(relx=1, x=-1110, y=120+(i * 90), anchor=NW)
 
-        sceneUpdateButton = tk.Button(w, text='End turn', width=30, height=4)
-        sceneUpdateButton.place(relx=1, x=-500, y=600, anchor=NE)
+        sceneUpdateButton = tk.Button(w, width=250, height=50, image = textButPT, compound=LEFT)
+        sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
 
         label.grid(row=0,column=0)
         w.mainloop()
