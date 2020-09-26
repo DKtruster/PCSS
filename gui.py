@@ -26,14 +26,20 @@ class displayGUI():
             stringHolder.config(bg='lightgreen')
 
             if i < 5:
-                stringHolder.place(relx=1, x=-50 - (i * 120), y=100, anchor=NE)
+                stringHolder.place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
             if i >= 5:
-                stringHolder.place(relx=1, x=-50 - ((i - 5) * 120), y=350, anchor=NE)
+                stringHolder.place(relx=1, x=-80 - ((i - 5) * 120), y=350, anchor=NE)
 
-        sceneUpdateButton = tk.Button(w, text='Update scene', width=15, height=10)
-        sceneUpdateButton.place(relx=1, x=-1000, y=150, anchor=NE)
+        for i in range(5):
+            stringHolder = "Shop card " + str(i)
+            stringHolder = tk.Button(w, width=35, height=5, text=("Card " + str(i)))
+            stringHolder.config(bg='lightgreen')
+
+            stringHolder.place(relx=1, x=-1120, y=120+(i * 90), anchor=NW)
+
+        sceneUpdateButton = tk.Button(w, text='End turn', width=30, height=4)
+        sceneUpdateButton.place(relx=1, x=-500, y=600, anchor=NE)
 
         label.grid(row=0,column=0)
-
         w.mainloop()
         # threading.Thread.__init__(target=w.mainloop()).start
