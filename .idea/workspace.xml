@@ -24,15 +24,36 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/P3/main - Lukas.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lukad\Documents\GitHub\ProjectPCSS\Assets" />
       <recent name="C:\Users\lukad\Documents\GitHub\ProjectPCSS" />
+      <recent name="C:\Users\lukad\Documents\GitHub\ProjectPCSS\Assets" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="gui (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjectPCSS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjectPCSS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -75,9 +96,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjectPCSS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.testing" />
+        <item itemvalue="Python.gui (1)" />
         <item itemvalue="Python.gui" />
       </list>
     </recent_temporary>
@@ -94,26 +138,46 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1601026880791">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1601124605298">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601026880791" />
-    <state width="1515" height="128" key="GridCell.Tab.0.bottom" timestamp="1601115360563">
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601124605298" />
+    <state width="1515" height="128" key="GridCell.Tab.0.bottom" timestamp="1601149781536">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="128" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601115360563" />
-    <state width="1515" height="128" key="GridCell.Tab.0.center" timestamp="1601115360562">
+    <state width="1515" height="128" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601149781536" />
+    <state width="1515" height="128" key="GridCell.Tab.0.center" timestamp="1601149781536">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="128" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601115360562" />
-    <state width="1515" height="128" key="GridCell.Tab.0.left" timestamp="1601115360562">
+    <state width="1515" height="128" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601149781536" />
+    <state width="1515" height="128" key="GridCell.Tab.0.left" timestamp="1601149781536">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="128" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601115360562" />
-    <state width="1515" height="128" key="GridCell.Tab.0.right" timestamp="1601115360562">
+    <state width="1515" height="128" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601149781536" />
+    <state width="1515" height="128" key="GridCell.Tab.0.right" timestamp="1601149781536">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="128" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601115360562" />
+    <state width="1515" height="128" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601149781536" />
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1601135213468">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601135213468" />
+    <state width="1515" height="277" key="GridCell.Tab.1.center" timestamp="1601135213468">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1601135213468" />
+    <state width="1515" height="277" key="GridCell.Tab.1.left" timestamp="1601135213467">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1601135213467" />
+    <state width="1515" height="277" key="GridCell.Tab.1.right" timestamp="1601135213468">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1601135213468" />
+    <state x="375" y="43" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601124159372">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="375" y="43" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1601124159372" />
     <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601114071374">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
