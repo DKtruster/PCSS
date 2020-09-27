@@ -15,6 +15,7 @@ def loadCards():
         print(dataLoader[lines])
 
 
+
 class Cards:
     __cardnumber = "0"
     __price = "0"
