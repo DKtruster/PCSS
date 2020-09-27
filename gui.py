@@ -1,19 +1,26 @@
 import tkinter as tk
 from tkinter import *
-import threading
 from PIL import Image, ImageTk
 
 w = tk.Tk()
-w.title("Game_name")
+w.title("PCSS Project - Lukas")
 w.geometry("1200x700")
 
-bg1 = Image.open("backgroundBoard.jpg")
+bg1 = Image.open("backgroundBoard3.jpg")
 bgPT = ImageTk.PhotoImage(bg1)
 label = Label(image=bgPT)
 
 textBut = Image.open("testButtonTexture.jpg")
 textButPT = ImageTk.PhotoImage(textBut)
-textButPTL = Label(image=textButPT)
+
+CDviking1 = Image.open("viking1low.jpg")
+CDviking1PT = ImageTk.PhotoImage(CDviking1)
+
+SPviking1 = Image.open("viking1shop.jpg")
+SPviking1PT = ImageTk.PhotoImage(SPviking1)
+
+CDunknown = Image.open("unknown1low.jpg")
+CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
 
@@ -24,9 +31,14 @@ class displayGUI():
         runCheck = runcheck
 
         for i in range(10):
+
+
             stringHolder = "cardHolder" + str(i)
-            stringHolder = tk.Button(w, width=15, height=10, text=("Card " + str(i)))
-            stringHolder.config(bg='lightgreen')
+
+            if i < 5:
+                stringHolder = tk.Button(w, width=105, height=185,image = CDunknownPT, compound=LEFT)
+            else:
+                stringHolder = tk.Button(w, width=105, height=185,image = CDviking1PT, compound=LEFT)
 
             if i < 5:
                 stringHolder.place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
@@ -35,10 +47,9 @@ class displayGUI():
 
         for i in range(5):
             stringHolder = "Shop card " + str(i)
-            stringHolder = tk.Button(w, width=35, height=5, text=("Card " + str(i)))
-            stringHolder.config(bg='lightgreen')
+            stringHolder = tk.Button(w, width=290, height=95,image = SPviking1PT)
 
-            stringHolder.place(relx=1, x=-1110, y=120+(i * 90), anchor=NW)
+            stringHolder.place(relx=1, x=-1150, y=110+(i * 95), anchor=NW)
 
         sceneUpdateButton = tk.Button(w, width=250, height=50, image = textButPT, compound=LEFT)
         sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
