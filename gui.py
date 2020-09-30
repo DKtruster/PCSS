@@ -1,13 +1,14 @@
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
+import random
 
 # WINDOW SETUP
 window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-playerCards, shopCards, boardArray = [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]]
+playerCards, shopCards, boardArray, shopArray = [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]],["","","","",""]
 
 # LOADING IMAGES
 bg1 = Image.open("Assets/backgroundBoard3.jpg")
@@ -23,19 +24,43 @@ CDviking1PT = ImageTk.PhotoImage(CDviking1)
 SPviking1 = Image.open("Assets/viking1shop.jpg")
 SPviking1PT = ImageTk.PhotoImage(SPviking1)
 
+CDroman1 = Image.open("Assets/roman1lowUI.jpg")
+CDroman1PT = ImageTk.PhotoImage(CDroman1)
+
+SProman1 = Image.open("Assets/roman1shop.jpg")
+SProman1PT = ImageTk.PhotoImage(SProman1)
+
 CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
 
 
-def shopBuy(cardNumber):
+def shopBuy(shopNumber):
+    if shopArray[shopNumber]==0:
+        for i in range(5):
+            if (boardArray[1][i + 5] == ""):
+                playerCards[i + 5].configure(image=CDviking1PT)
+                boardArray[1][i + 5] = "Thor"
+                return ()
+    if shopArray[shopNumber]==1:
+        for i in range(5):
+            if (boardArray[1][i + 5] == ""):
+                playerCards[i + 5].configure(image=CDroman1PT)
+                boardArray[1][i + 5] = "Roman"
+                return ()
+    print("Shop: " + str(shopNumber))
+
+def shopRandom():
     for i in range(5):
-        if (boardArray[1][i + 5] == ""):
-            playerCards[i + 5].configure(image=CDviking1PT)
-            boardArray[1][i + 5] = "Thor"
-            return ()
-    print("Shop: " + str(cardNumber))
+        rand = random.randint(0, 1)
+        if rand == 0:
+            shopCards[i].configure(image=SPviking1PT)
+            shopArray[i]=0
+        if rand == 1:
+            shopCards[i].configure(image=SProman1PT)
+            shopArray[i]=1
+        print("Shop numbers: "+ str(rand))
 
 
 def cardSelect(PlayerSelect, cardNumber):
@@ -62,7 +87,7 @@ class displayGUI():
         for i in range(5):
             shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
 
-        sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT)
+        sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT, command=shopRandom)
         sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
 
         backgroundL.grid(row=0, column=0)
@@ -87,3 +112,4 @@ class displayGUI():
             stringHolder = tk.Button(window, width=290, height=95, image=SPviking1PT,
                                      command=lambda holder=i: shopBuy(holder))
             shopCards.append(stringHolder)
+        shopRandom()

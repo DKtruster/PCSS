@@ -7,6 +7,7 @@ class main:
     loadCards()
 
     displayGUI.setup("")
+    displayGUI
     displayGUI(True)
 
     while True:
