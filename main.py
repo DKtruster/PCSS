@@ -6,6 +6,7 @@ class main:
     # SETUP
     loadCards()
 
+    
     displayGUI(True)
 
     while True:
