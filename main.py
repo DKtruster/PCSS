@@ -6,14 +6,9 @@ class main:
     # SETUP
     loadCards()
 
-    
+    displayGUI.setup("")
     displayGUI(True)
 
     while True:
         ("Test")
-
-    # DISPLAY CARDS
-
-    # SHOP
-
 

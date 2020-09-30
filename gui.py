@@ -2,35 +2,41 @@ import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
 
-w = tk.Tk()
-w.title("PCSS Project - Lukas")
-w.geometry("1200x700")
+# WINDOW SETUP
+window = tk.Tk()
+window.title("PCSS Project - Lukas")
+window.geometry("1200x700")
 
-bg1 = Image.open("backgroundBoard3.jpg")
+playerCards, shopCards = [],[]
+
+# LOADING IMAGES
+bg1 = Image.open("Assets/backgroundBoard3.jpg")
 bgPT = ImageTk.PhotoImage(bg1)
-label = Label(image=bgPT)
+backgroundL = Label(image=bgPT)
 
-textBut = Image.open("testButtonTexture.jpg")
+textBut = Image.open("Assets/testButtonTexture.jpg")
 textButPT = ImageTk.PhotoImage(textBut)
 
-CDviking1 = Image.open("viking1low.jpg")
+CDviking1 = Image.open("Assets/viking1low.jpg")
 CDviking1PT = ImageTk.PhotoImage(CDviking1)
 
-SPviking1 = Image.open("viking1shop.jpg")
+SPviking1 = Image.open("Assets/viking1shop.jpg")
 SPviking1PT = ImageTk.PhotoImage(SPviking1)
 
-CDunknown = Image.open("unknown1low.jpg")
+CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
 
 
-
 def shopBuy(cardNumber):
-    print("Shop: " +str(cardNumber))
+    playerCards[5].configure(image=CDviking1PT)
+    print("Shop: " + str(cardNumber))
+
 
 def cardSelect(PlayerSelect, cardNumber):
-    print("Card: "+str(cardNumber)+" Player: "+str(PlayerSelect))
+    playerCards[cardNumber].configure(image=CDunknownPT)
+    print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
 
 
 class displayGUI():
@@ -39,27 +45,35 @@ class displayGUI():
         runCheck = runcheck
 
         for i in range(10):
+            if i < 5:
+                playerCards[i].place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
+            if i >= 5:
+                playerCards[i].place(relx=1, x=-80 - ((i - 5) * 120), y=350, anchor=NE)
+
+        for i in range(5):
+            shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
+
+        sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT)
+        sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
+
+        backgroundL.grid(row=0, column=0)
+        window.mainloop()
+        # threading.Thread.__init__(target=w.mainloop()).start
+
+    def setup(self):
+        for i in range(10):
             stringHolder = "cardHolder" + str(i)
 
             if i < 5:
-                stringHolder = tk.Button(w, width=105, height=185,image=CDunknownPT, compound=LEFT, command= lambda holder=i: cardSelect(1, holder))
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, compound=LEFT,
+                                         command=lambda holder=i: cardSelect(1, holder))
+                playerCards.append(stringHolder)
             else:
-                stringHolder = tk.Button(w, width=105, height=185,image=CDviking1PT, compound=LEFT, command= lambda holder=i: cardSelect(2, holder))
-
-            if i < 5:
-                stringHolder.place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
-            if i >= 5:
-                stringHolder.place(relx=1, x=-80 - ((i - 5) * 120), y=350, anchor=NE)
-
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, compound=LEFT,
+                                         command=lambda holder=i: cardSelect(2, holder))
+                playerCards.append(stringHolder)
 
         for i in range(5):
             stringHolder = "ShopCard" + str(i)
-            stringHolder = tk.Button(w, width=290, height=95,image = SPviking1PT, command= lambda holder=i: shopBuy(holder))
-            stringHolder.place(relx=1, x=-1150, y=110+(i * 95), anchor=NW)
-
-        sceneUpdateButton = tk.Button(w, width=250, height=50, image = textButPT, compound=LEFT)
-        sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
-
-        label.grid(row=0,column=0)
-        w.mainloop()
-        # threading.Thread.__init__(target=w.mainloop()).start
+            stringHolder = tk.Button(window, width=290, height=95, image=SPviking1PT,command=lambda holder=i: shopBuy(holder))
+            shopCards.append(stringHolder)
