@@ -7,7 +7,7 @@ window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-playerCards, shopCards = [],[]
+playerCards, shopCards, boardArray = [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]]
 
 # LOADING IMAGES
 bg1 = Image.open("Assets/backgroundBoard3.jpg")
@@ -30,13 +30,22 @@ runCheck = False
 
 
 def shopBuy(cardNumber):
-    playerCards[5].configure(image=CDviking1PT)
+    for i in range(5):
+        if (boardArray[1][i + 5] == ""):
+            playerCards[i + 5].configure(image=CDviking1PT)
+            boardArray[1][i + 5] = "Thor"
+            return ()
     print("Shop: " + str(cardNumber))
 
 
 def cardSelect(PlayerSelect, cardNumber):
+    boardArray[PlayerSelect - 1][cardNumber] = ""
     playerCards[cardNumber].configure(image=CDunknownPT)
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
+    print(boardArray[0][0] + " " + boardArray[0][1] + " " + boardArray[0][2] + " " + boardArray[0][3] + " " +
+          boardArray[0][4])
+    print(boardArray[1][5] + " " + boardArray[1][6] + " " + boardArray[1][7] + " " + boardArray[1][8] + " " +
+          boardArray[1][9])
 
 
 class displayGUI():
@@ -75,5 +84,6 @@ class displayGUI():
 
         for i in range(5):
             stringHolder = "ShopCard" + str(i)
-            stringHolder = tk.Button(window, width=290, height=95, image=SPviking1PT,command=lambda holder=i: shopBuy(holder))
+            stringHolder = tk.Button(window, width=290, height=95, image=SPviking1PT,
+                                     command=lambda holder=i: shopBuy(holder))
             shopCards.append(stringHolder)
