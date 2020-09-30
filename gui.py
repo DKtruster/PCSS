@@ -30,6 +30,12 @@ CDroman1PT = ImageTk.PhotoImage(CDroman1)
 SProman1 = Image.open("Assets/roman1shop.jpg")
 SProman1PT = ImageTk.PhotoImage(SProman1)
 
+CDchinese1 = Image.open("Assets/chinese1lowUI.jpg")
+CDchinese1PT = ImageTk.PhotoImage(CDchinese1)
+
+SPchinese1 = Image.open("Assets/chinese1shop.jpg")
+SPchinese1PT = ImageTk.PhotoImage(SPchinese1)
+
 CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
@@ -49,17 +55,26 @@ def shopBuy(shopNumber):
                 playerCards[i + 5].configure(image=CDroman1PT)
                 boardArray[1][i + 5] = "Roman"
                 return ()
+    if shopArray[shopNumber]==2:
+        for i in range(5):
+            if (boardArray[1][i + 5] == ""):
+                playerCards[i + 5].configure(image=CDchinese1PT)
+                boardArray[1][i + 5] = "Chinese"
+                return ()
     print("Shop: " + str(shopNumber))
 
 def shopRandom():
     for i in range(5):
-        rand = random.randint(0, 1)
+        rand = random.randint(0, 2)
         if rand == 0:
             shopCards[i].configure(image=SPviking1PT)
             shopArray[i]=0
         if rand == 1:
             shopCards[i].configure(image=SProman1PT)
             shopArray[i]=1
+        if rand == 2:
+            shopCards[i].configure(image=SPchinese1PT)
+            shopArray[i]=2
         print("Shop numbers: "+ str(rand))
 
 
