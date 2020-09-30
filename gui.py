@@ -27,10 +27,10 @@ runCheck = False
 
 
 def shopBuy(cardNumber):
-    print(cardNumber)
+    print("Shop: " +str(cardNumber))
 
 def cardSelect(PlayerSelect, cardNumber):
-    print("Player Selected: #"+PlayerSelect+ "# Card Selected: #"+str(cardNumber)+"#")
+    print("Card: "+str(cardNumber)+" Player: "+str(PlayerSelect))
 
 
 class displayGUI():
@@ -42,9 +42,9 @@ class displayGUI():
             stringHolder = "cardHolder" + str(i)
 
             if i < 5:
-                stringHolder = tk.Button(w, width=105, height=185,image = CDunknownPT, compound=LEFT, command= lambda holder=i: cardSelect("Player1", holder))
+                stringHolder = tk.Button(w, width=105, height=185,image=CDunknownPT, compound=LEFT, command= lambda holder=i: cardSelect(1, holder))
             else:
-                stringHolder = tk.Button(w, width=105, height=185,image = CDviking1PT, compound=LEFT, command= lambda holder=i: cardSelect("Player2",holder))
+                stringHolder = tk.Button(w, width=105, height=185,image=CDviking1PT, compound=LEFT, command= lambda holder=i: cardSelect(2, holder))
 
             if i < 5:
                 stringHolder.place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
@@ -54,7 +54,7 @@ class displayGUI():
 
         for i in range(5):
             stringHolder = "ShopCard" + str(i)
-            stringHolder = tk.Button(w, width=290, height=95,image = SPviking1PT, command= lambda holder="Shop"+str(i): shopBuy(holder))
+            stringHolder = tk.Button(w, width=290, height=95,image = SPviking1PT, command= lambda holder=i: shopBuy(holder))
             stringHolder.place(relx=1, x=-1150, y=110+(i * 95), anchor=NW)
 
         sceneUpdateButton = tk.Button(w, width=250, height=50, image = textButPT, compound=LEFT)
