@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
+from gameRun import gameRun
 import random
+import cards
 
 # WINDOW SETUP
 window = tk.Tk()
@@ -47,18 +49,21 @@ def shopBuy(shopNumber):
         for i in range(5):
             if (boardArray[1][i + 5] == ""):
                 playerCards[i + 5].configure(image=CDviking1PT)
+                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cards.dataLoader[0][4]+"                 "+cards.dataLoader[0][5])
                 boardArray[1][i + 5] = "Thor"
                 return ()
     if shopArray[shopNumber]==1:
         for i in range(5):
             if (boardArray[1][i + 5] == ""):
                 playerCards[i + 5].configure(image=CDroman1PT)
+                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cards.dataLoader[5][4]+"                 "+cards.dataLoader[5][5])
                 boardArray[1][i + 5] = "Roman"
                 return ()
     if shopArray[shopNumber]==2:
         for i in range(5):
             if (boardArray[1][i + 5] == ""):
                 playerCards[i + 5].configure(image=CDchinese1PT)
+                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cards.dataLoader[10][4]+"                 "+cards.dataLoader[10][5])
                 boardArray[1][i + 5] = "Chinese"
                 return ()
     print("Shop: " + str(shopNumber))
@@ -75,12 +80,12 @@ def shopRandom():
         if rand == 2:
             shopCards[i].configure(image=SPchinese1PT)
             shopArray[i]=2
-        print("Shop numbers: "+ str(rand))
+    gameRun.loadCombat("", boardArray)
 
 
 def cardSelect(PlayerSelect, cardNumber):
     boardArray[PlayerSelect - 1][cardNumber] = ""
-    playerCards[cardNumber].configure(image=CDunknownPT)
+    playerCards[cardNumber].configure(image=CDunknownPT, text="")
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
     print(boardArray[0][0] + " " + boardArray[0][1] + " " + boardArray[0][2] + " " + boardArray[0][3] + " " +
           boardArray[0][4])
@@ -118,7 +123,7 @@ class displayGUI():
                                          command=lambda holder=i: cardSelect(1, holder))
                 playerCards.append(stringHolder)
             else:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, compound=LEFT,
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", text=("\n\n\n\n\n\n\n\n\n\n\n"+"                 "+""),compound=tk.CENTER ,
                                          command=lambda holder=i: cardSelect(2, holder))
                 playerCards.append(stringHolder)
 

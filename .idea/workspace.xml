@@ -24,7 +24,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/Image Processing/King Domino - Miniprojekt/main - Lukas.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/P3" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -141,8 +141,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.gui (1)" />
         <item itemvalue="Python.testing" />
+        <item itemvalue="Python.gui (1)" />
         <item itemvalue="Python.main - Lukas" />
         <item itemvalue="Python.gui" />
       </list>
@@ -160,26 +160,26 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1601462550622">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1601537329398">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601462550622" />
-    <state width="1515" height="180" key="GridCell.Tab.0.bottom" timestamp="1601479237476">
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601537329398" />
+    <state width="1515" height="180" key="GridCell.Tab.0.bottom" timestamp="1601577515786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601479237476" />
-    <state width="1515" height="180" key="GridCell.Tab.0.center" timestamp="1601479237476">
+    <state width="1515" height="180" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601577515786" />
+    <state width="1515" height="180" key="GridCell.Tab.0.center" timestamp="1601577515786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601479237476" />
-    <state width="1515" height="180" key="GridCell.Tab.0.left" timestamp="1601479237476">
+    <state width="1515" height="180" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601577515786" />
+    <state width="1515" height="180" key="GridCell.Tab.0.left" timestamp="1601577515786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601479237476" />
-    <state width="1515" height="180" key="GridCell.Tab.0.right" timestamp="1601479237476">
+    <state width="1515" height="180" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601577515786" />
+    <state width="1515" height="180" key="GridCell.Tab.0.right" timestamp="1601577515786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601479237476" />
+    <state width="1515" height="180" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601577515786" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1601135213468">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
