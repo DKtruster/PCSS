@@ -1,9 +1,9 @@
-0 1 Thor Viking 2 10 "viking1low.jpg" "viking1shop.jpg"
+0 1 Thor Viking 2 10 CDviking1PT SPviking1PT
 1 2 Thor Viking 2 10 "" ""
 2 3 Thor Viking 2 10 "" ""
 3 4 Thor Viking 2 10 "" ""
 4 5 Thor Viking 2 10 "" ""
-5 1 Caesar Roman 4 6 "" ""
+5 1 Caesar Roman 4 6 CDroman1PT SProman1PT
 6 2 Caesar Roman 4 6 "" ""
 7 3 Caesar Roman 4 6 "" ""
 8 4 Caesar Roman 4 6 "" ""

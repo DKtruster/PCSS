@@ -1,15 +1,12 @@
 from gui import displayGUI
 from cards import loadCards
+import cards
 import threading
 
 class main:
     # SETUP
-    loadCards()
 
     displayGUI.setup("")
-    displayGUI
     displayGUI(True)
 
-    while True:
-        ("Test")
 
