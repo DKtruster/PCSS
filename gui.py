@@ -46,8 +46,10 @@ def shopBuy(shopNumber):
                     playerCards[c + 5].configure(image=Assets.cardImg[i])
                     playerCards[c+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cardPlaceStrHold.get_health()+"                "+cardPlaceStrHold.get_damage())
                     boardArray[1][c + 5] = cardPlaceStrHold.get_name()
+                    print("System message: Purchased: "+str(cardPlaceStrHold.get_name()))
                     return
-    print("Shop: " + str(shopNumber))
+        if i == 2:
+            print("System message: No more capacity")
 
 def shopRandom():
     for i in range(5):

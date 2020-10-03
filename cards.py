@@ -38,10 +38,7 @@ class Cards:
                 self.__damage = cardNames[i][5]
                 self.__cardImg = cardNames[i][6]
                 self.__shopImg = cardNames[i][7]
-                print("Data successfully loaded for: "+cardNumber)
                 return
-        else:
-            ""
 
 
 
