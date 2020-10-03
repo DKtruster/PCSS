@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from gameRun import gameRun
 import random
 import cards
+import Assets
 
 # WINDOW SETUP
 window = tk.Tk()
@@ -13,34 +14,18 @@ window.geometry("1200x700")
 playerCards, shopCards, boardArray, shopArray = [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]],["","","","",""]
 cardImg = []
 
+for i in range (len(Assets.cardImg)):
+    Assets.cardImg[i] = ImageTk.PhotoImage(Assets.cardImg[i])
+
+for i in range (len(Assets.shopImg)):
+    Assets.shopImg[i] = ImageTk.PhotoImage(Assets.shopImg[i])
+
 # LOADING IMAGES
-bg1 = Image.open("Assets/backgroundBoard3.jpg")
-bgPT = ImageTk.PhotoImage(bg1)
+bgPT = ImageTk.PhotoImage(Assets.bg1)
 backgroundL = Label(image=bgPT)
 
 textBut = Image.open("Assets/testButtonTexture.jpg")
 textButPT = ImageTk.PhotoImage(textBut)
-
-CDviking1 = Image.open("Assets/viking1low.jpg")
-CDviking1PT = ImageTk.PhotoImage(CDviking1)
-cardImg.append(CDviking1PT)
-
-SPviking1 = Image.open("Assets/viking1shop.jpg")
-SPviking1PT = ImageTk.PhotoImage(SPviking1)
-
-CDroman1 = Image.open("Assets/roman1lowUI.jpg")
-CDroman1PT = ImageTk.PhotoImage(CDroman1)
-cardImg.append(CDroman1PT)
-
-SProman1 = Image.open("Assets/roman1shop.jpg")
-SProman1PT = ImageTk.PhotoImage(SProman1)
-
-CDchinese1 = Image.open("Assets/chinese1lowUI.jpg")
-CDchinese1PT = ImageTk.PhotoImage(CDchinese1)
-cardImg.append(CDchinese1PT)
-
-SPchinese1 = Image.open("Assets/chinese1shop.jpg")
-SPchinese1PT = ImageTk.PhotoImage(SPchinese1)
 
 CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
@@ -50,44 +35,25 @@ runCheck = False
 
 def shopBuy(shopNumber):
     cardPlaceStrHold = ""
-    if shopArray[shopNumber]==0:
-        for i in range(5):
-            if (boardArray[1][i + 5] == ""):
-                cardPlaceStrHold = "cardPlace"+str(i)
-                cardPlaceStrHold = cards.Cards()
-                cardPlaceStrHold.searchData("1")
-                playerCards[i + 5].configure(image=cardImg[0])
-                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cardPlaceStrHold.get_health()+"                "+cardPlaceStrHold.get_damage())
-                boardArray[1][i + 5] = cardPlaceStrHold.get_name()
-                return
-    if shopArray[shopNumber]==1:
-        for i in range(5):
-            if (boardArray[1][i + 5] == ""):
-                playerCards[i + 5].configure(image=CDroman1PT)
-                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cards.dataLoader[5][4]+"                 "+cards.dataLoader[5][5])
-                boardArray[1][i + 5] = "Roman"
-                return
-    if shopArray[shopNumber]==2:
-        for i in range(5):
-            if (boardArray[1][i + 5] == ""):
-                playerCards[i + 5].configure(image=CDchinese1PT)
-                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cards.dataLoader[10][4]+"                 "+cards.dataLoader[10][5])
-                boardArray[1][i + 5] = "Chinese"
-                return
+    for i in range (3):
+        if shopArray[shopNumber]==i:
+            for c in range(5):
+                if (boardArray[1][c + 5] == ""):
+                    cardPlaceStrHold = "cardPlace"+str(c)
+                    print(cardPlaceStrHold)
+                    cardPlaceStrHold = cards.Cards()
+                    cardPlaceStrHold.searchData(str(i))
+                    playerCards[c + 5].configure(image=Assets.cardImg[i])
+                    playerCards[c+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cardPlaceStrHold.get_health()+"                "+cardPlaceStrHold.get_damage())
+                    boardArray[1][c + 5] = cardPlaceStrHold.get_name()
+                    return
     print("Shop: " + str(shopNumber))
 
 def shopRandom():
     for i in range(5):
         rand = random.randint(0, 2)
-        if rand == 0:
-            shopCards[i].configure(image=SPviking1PT)
-            shopArray[i]=0
-        if rand == 1:
-            shopCards[i].configure(image=SProman1PT)
-            shopArray[i]=1
-        if rand == 2:
-            shopCards[i].configure(image=SPchinese1PT)
-            shopArray[i]=2
+        shopCards[i].configure(image=Assets.shopImg[rand])
+        shopArray[i] = rand
     gameRun.loadCombat("", boardArray)
 
 
@@ -118,6 +84,7 @@ class displayGUI():
 
         sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT, command=shopRandom)
         sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
+
 
         backgroundL.grid(row=0, column=0)
         window.mainloop()

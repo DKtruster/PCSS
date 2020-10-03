@@ -25,20 +25,23 @@ class Cards:
     __shopImg = "CDviking1"
 
 
-    def searchData(self, cardName):
+    def searchData(self, cardNumber):
         loadCards()
         for i in range (len(cardNames)-1):
-            if cardNames[i][0]==cardName:
+            if cardNames[i][0]==cardNumber:
                 self.__cardnumber = cardNames[i][0]
                 self.__price = cardNames[i][1]
                 self.__name = cardNames[i][2]
                 self.__origin = cardNames[i][3]
                 self.__health = cardNames[i][4]
+                print(cardNames[i][4])
                 self.__damage = cardNames[i][5]
                 self.__cardImg = cardNames[i][6]
                 self.__shopImg = cardNames[i][7]
-                print("Data successfully loaded for: "+cardName)
+                print("Data successfully loaded for: "+cardNumber)
                 return
+        else:
+            ""
 
 
 

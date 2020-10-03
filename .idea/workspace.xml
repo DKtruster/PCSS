@@ -36,6 +36,48 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="Assets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjectPCSS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Assets.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cards" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjectPCSS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cards.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="gui (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjectPCSS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -49,48 +91,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjectPCSS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\lukad\Documents\GitHub\ProjectPCSS\gui.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main - Lukas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjectPCSS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/Image Processing/King Domino - Miniprojekt" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/Image Processing/King Domino - Miniprojekt/main - Lukas.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,10 +144,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.testing" />
         <item itemvalue="Python.gui (1)" />
-        <item itemvalue="Python.main - Lukas" />
-        <item itemvalue="Python.gui" />
+        <item itemvalue="Python.Assets" />
+        <item itemvalue="Python.cards" />
+        <item itemvalue="Python.testing" />
       </list>
     </recent_temporary>
   </component>
@@ -167,22 +167,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601620796620" />
-    <state width="1515" height="180" key="GridCell.Tab.0.bottom" timestamp="1601722656119">
+    <state width="1515" height="180" key="GridCell.Tab.0.bottom" timestamp="1601727114556">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601722656119" />
-    <state width="1515" height="180" key="GridCell.Tab.0.center" timestamp="1601722656119">
+    <state width="1515" height="180" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601727114556" />
+    <state width="1515" height="180" key="GridCell.Tab.0.center" timestamp="1601727114556">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601722656119" />
-    <state width="1515" height="180" key="GridCell.Tab.0.left" timestamp="1601722656119">
+    <state width="1515" height="180" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601727114556" />
+    <state width="1515" height="180" key="GridCell.Tab.0.left" timestamp="1601727114556">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601722656119" />
-    <state width="1515" height="180" key="GridCell.Tab.0.right" timestamp="1601722656119">
+    <state width="1515" height="180" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601727114556" />
+    <state width="1515" height="180" key="GridCell.Tab.0.right" timestamp="1601727114556">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="180" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601722656119" />
+    <state width="1515" height="180" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601727114556" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1601135213468">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -207,9 +207,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1601114071374" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1601722073896">
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1601726400470">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1601722073896" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1601726400470" />
   </component>
 </project>
