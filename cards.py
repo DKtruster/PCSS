@@ -20,7 +20,7 @@ class Cards:
     __name = "NameHold"
     __origin = "OriginHold"
     __health = "0"
-    __damage = "0"
+    __damage = 0
     __cardImg = "CDviking1"
     __shopImg = "CDviking1"
 
@@ -34,7 +34,6 @@ class Cards:
                 self.__name = cardNames[i][2]
                 self.__origin = cardNames[i][3]
                 self.__health = cardNames[i][4]
-                print(cardNames[i][4])
                 self.__damage = cardNames[i][5]
                 self.__cardImg = cardNames[i][6]
                 self.__shopImg = cardNames[i][7]
@@ -59,3 +58,9 @@ class Cards:
 
     def get_shopImg(self):
         return self.__shopImg
+
+    def losehp(self, losthp):
+        self.__damage = int(self.__damage)-losthp
+
+    def test(self):
+        return self.__damage

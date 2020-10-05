@@ -6,12 +6,14 @@ import random
 import cards
 import Assets
 
+test1 = cards.Cards()
+
 # WINDOW SETUP
 window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-playerCards, shopCards, boardArray, shopArray = [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]],["","","","",""]
+cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], [["", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""]],["","","","",""]
 cardImg = []
 
 for i in range (len(Assets.cardImg)):
@@ -40,12 +42,16 @@ def shopBuy(shopNumber):
             for c in range(5):
                 if (boardArray[1][c + 5] == ""):
                     cardPlaceStrHold = "cardPlace"+str(c)
-                    print(cardPlaceStrHold)
+                    #print(cardPlaceStrHold)
                     cardPlaceStrHold = cards.Cards()
                     cardPlaceStrHold.searchData(str(i))
                     playerCards[c + 5].configure(image=Assets.cardImg[i])
                     playerCards[c+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+cardPlaceStrHold.get_health()+"                "+cardPlaceStrHold.get_damage())
                     boardArray[1][c + 5] = cardPlaceStrHold.get_name()
+                    if len(cardObjects) > c:
+                        cardObjects[c]=cardPlaceStrHold
+                    cardObjects.append(cardPlaceStrHold)
+                    #print(cardPlaceStrHold.test())
                     print("System message: Purchased: "+str(cardPlaceStrHold.get_name()))
                     return
         if i == 2:
@@ -57,18 +63,24 @@ def shopRandom():
         shopCards[i].configure(image=Assets.shopImg[rand])
         shopArray[i] = rand
     gameRun.loadCombat("", boardArray)
+    if len(cardObjects)>0:
+        cardObjects[0].losehp(3)
+        print("Health: " + str(cardObjects[0].test()))
+        displayGUI.updateCards(self="")
+        displayGUI(True)
 
 
 def cardSelect(PlayerSelect, cardNumber):
     boardArray[PlayerSelect - 1][cardNumber] = ""
     playerCards[cardNumber].configure(image=CDunknownPT, text="")
-    #playerCards[cardNumber].place(relx=1,x=-80,y=130,anchor=NE)
+    #cardObjects[cardNumber-5].losehp(3)
+    displayGUI.updateCards(self="")
+
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
     print(boardArray[0][0] + " " + boardArray[0][1] + " " + boardArray[0][2] + " " + boardArray[0][3] + " " +
           boardArray[0][4])
     print(boardArray[1][5] + " " + boardArray[1][6] + " " + boardArray[1][7] + " " + boardArray[1][8] + " " +
           boardArray[1][9])
-
 
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
@@ -90,6 +102,11 @@ class displayGUI():
 
         backgroundL.grid(row=0, column=0)
         window.mainloop()
+
+    def updateCards(self):
+        for i in range(5):
+            if boardArray[1][i]!="":
+                playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+str(cardObjects[i].get_health())+"                "+str(cardObjects[i].get_damage()))
 
     def setup(self):
         for i in range(10):

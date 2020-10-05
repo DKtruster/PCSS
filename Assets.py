@@ -29,5 +29,3 @@ shopImg.append(SPchinese1)
 
 CDunknown = Image.open("Assets/unknown1low.jpg")
 assetsImg.append(bg1)
-
-print(len(cardImg))
