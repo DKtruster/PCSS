@@ -105,8 +105,10 @@ class displayGUI():
 
     def updateCards(self):
         for i in range(5):
-            if boardArray[1][i]!="":
+            if boardArray[1][i+5] != "":
                 playerCards[i+5].configure(text="\n\n\n\n\n\n\n\n\n\n\n"+str(cardObjects[i].get_health())+"                "+str(cardObjects[i].get_damage()))
+            if boardArray[1][i+5] == "":
+                playerCards[i+5].configure(text="")
 
     def setup(self):
         for i in range(10):
