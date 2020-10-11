@@ -61,10 +61,29 @@ def shopRandom():
         rand = random.randint(0, 2)
         shopCards[i].configure(image=Assets.shopImg[rand])
         shopArray[i] = rand
-    gameRun.loadCombat("", boardArray)
     if len(cardObjects) > 0:
         displayGUI.updateCards(self="")
         displayGUI(True)
+
+def endRound():
+    #shopRandom()
+    for c in range(5):
+        rand = random.randint(0, 2)
+        if (boardArray[0][c] == ""):
+            cardPlaceStrHold = "cardPlace" + str(c)
+            cardPlaceStrHold = cards.Cards()
+            cardPlaceStrHold.searchData(str(rand))
+            playerCards[c].configure(image=Assets.cardImg[rand])
+            playerCards[c].configure(
+                text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_health() + "                " + cardPlaceStrHold.get_damage())
+            boardArray[0][c] = cardPlaceStrHold.get_name()
+            if len(cardObjects) > c+5:
+                cardObjects[c+5] = cardPlaceStrHold
+            cardObjects.append(cardPlaceStrHold)
+            print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
+    print("test111")
+    displayGUI.updateCards("")
+    gameRun.loadCombat("", boardArray)
 
 
 def cardSelect(PlayerSelect, cardNumber):
@@ -92,7 +111,7 @@ class displayGUI():
         for i in range(5):
             shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
 
-        sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT, command=shopRandom)
+        sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT, command=endRound)
         sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
 
         backgroundL.grid(row=0, column=0)
@@ -106,13 +125,21 @@ class displayGUI():
                         cardObjects[i].get_damage()))
             if boardArray[1][i + 5] == "":
                 playerCards[i + 5].configure(text="")
+        for i in range(5):
+            if boardArray[0][i] != "":
+                print((cardObjects[i+5].get_health())+ " " +(cardObjects[i+5].get_damage()))
+                playerCards[1].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i+5].get_health()) + "                " + str(cardObjects[i].get_damage()))
+            if boardArray[0][i] == "":
+                playerCards[i].configure(text="")
+
 
     def setup(self):
         for i in range(10):
             stringHolder = "cardHolder" + str(i)
 
             if i < 5:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, compound=LEFT,
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white",
+                                         compound=tk.CENTER,
                                          command=lambda holder=i: cardSelect(1, holder))
                 playerCards.append(stringHolder)
             else:
