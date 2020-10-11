@@ -61,7 +61,7 @@ def shopRandom():
         rand = random.randint(0, 2)
         shopCards[i].configure(image=Assets.shopImg[rand])
         shopArray[i] = rand
-    gameRun.loadCombat("", boardArray, True)
+    gameRun.loadCombat("", boardArray)
     if len(cardObjects) > 0:
         displayGUI.updateCards(self="")
         displayGUI(True)

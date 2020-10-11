@@ -1,25 +1,25 @@
 import gui
 
-runcheck = False
-player1Count = 0
-player2Count = 0
-
-
 class gameRun:
-    def loadCombat(self, boardArray, runCheck):
-        runcheck = runCheck
-        print(runcheck)
-        if (runcheck):
-            print("Loading combat...")
-            print(boardArray[0][0],boardArray[0][1],boardArray[0][2],boardArray[0][3],boardArray[0][4])
-            print(boardArray[1][5],boardArray[1][6],boardArray[1][7],boardArray[1][8],boardArray[1][9])
+    def loadCombat(self, boardArray):
+        playerOneCount = 0
+        playerTwoCount = 0
 
-        for x in range (2):
-            for i in range (5):
-                if boardArray[x][i] != "":
-                    strHold = "player"+x+"Count"
-                    strHold = strHold+1
+        # Counts the amount of cards each player have
+        for i in range(5):
+            if boardArray[0][i] != "":
+                playerOneCount = playerOneCount + 1
 
-        if boardArray[1][6] != "":
-            print(boardArray[1][6])
-            print(str(gui.cardObjects[0].get_health()))
+        for i in range(5):
+            if boardArray[1][i + 5] != "":
+                playerTwoCount = playerTwoCount + 1
+
+        # Only starts the combat if one of the two players have a card on the deck
+        if playerOneCount > 0 or playerTwoCount>0:
+            print("Loading board...")
+            print("PlayerOne has: "+str(playerOneCount)+ " cards \n PlayerTwo has: "+str(playerTwoCount)+" cards")
+            print("PlayerOne: "+boardArray[0][0], boardArray[0][1], boardArray[0][2], boardArray[0][3], boardArray[0][4])
+            print("PlayerTwo: "+boardArray[1][5], boardArray[1][6], boardArray[1][7], boardArray[1][8], boardArray[1][9]+"\n")
+
+
+            print("Preparing combat...")
