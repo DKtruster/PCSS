@@ -22,12 +22,12 @@ class Cards:
     __price = "0"
     __name = "NameHold"
     __origin = "OriginHold"
-    __health = "0"
+    __health = 0
     __damage = 0
     __cardImg = "CDviking1"
     __shopImg = "CDviking1"
 
-
+    # TO-DO: Add binary search
     def searchData(self, cardNumber):
         loadCards()
         for i in range (len(cardNames)-1):
@@ -36,13 +36,11 @@ class Cards:
                 self.__price = cardNames[i][1]
                 self.__name = cardNames[i][2]
                 self.__origin = cardNames[i][3]
-                self.__health = cardNames[i][4]
-                self.__damage = cardNames[i][5]
+                self.__health = cardNames[i][5]
+                self.__damage = cardNames[i][4]
                 self.__cardImg = cardNames[i][6]
                 self.__shopImg = cardNames[i][7]
                 return
-
-
 
     def get_name(self):
         return self.__name
@@ -63,7 +61,7 @@ class Cards:
         return self.__shopImg
 
     def losehp(self, losthp):
-        self.__damage = int(self.__damage)-losthp
+        self.__health = int(self.__health)-losthp
 
     def test(self):
         return self.__damage

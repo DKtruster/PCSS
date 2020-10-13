@@ -45,7 +45,7 @@ def shopBuy(shopNumber):
                     cardPlaceStrHold.searchData(str(i))
                     playerCards[c + 5].configure(image=Assets.cardImg[i])
                     playerCards[c + 5].configure(
-                        text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_health() + "                " + cardPlaceStrHold.get_damage())
+                        text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
                     boardArray[1][c + 5] = cardPlaceStrHold.get_name()
                     if len(cardObjects) > c:
                         cardObjects[c] = cardPlaceStrHold
@@ -67,28 +67,31 @@ def shopRandom():
 
 def endRound():
     #shopRandom()
-    for c in range(5):
-        rand = random.randint(0, 2)
-        if (boardArray[0][c] == ""):
-            cardPlaceStrHold = "cardPlace" + str(c)
-            cardPlaceStrHold = cards.Cards()
-            cardPlaceStrHold.searchData(str(rand))
-            playerCards[c].configure(image=Assets.cardImg[rand])
-            playerCards[c].configure(
-                text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_health() + "                " + cardPlaceStrHold.get_damage())
-            boardArray[0][c] = cardPlaceStrHold.get_name()
-            if len(cardObjects) > c+5:
-                cardObjects[c+5] = cardPlaceStrHold
-            cardObjects.append(cardPlaceStrHold)
-            print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
+    if len(cardObjects)<6:
+        for c in range(5):
+            rand = random.randint(0, 2)
+            if (boardArray[0][c] == ""):
+                cardPlaceStrHold = "cardPlace" + str(c)
+                cardPlaceStrHold = cards.Cards()
+                cardPlaceStrHold.searchData(str(rand))
+                playerCards[c].configure(image=Assets.cardImg[rand])
+                playerCards[c].configure(
+                    text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
+                boardArray[0][c] = cardPlaceStrHold.get_name()
+                if len(cardObjects) > c+5:
+                    cardObjects[c+5] = cardPlaceStrHold
+                cardObjects.append(cardPlaceStrHold)
+                print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
     print("test111")
     displayGUI.updateCards("")
     gameRun.loadCombat("", boardArray)
 
 
 def cardSelect(PlayerSelect, cardNumber):
-    boardArray[PlayerSelect - 1][cardNumber] = ""
-    playerCards[cardNumber].configure(image=CDunknownPT, text="")
+    #boardArray[PlayerSelect - 1][cardNumber] = ""
+    #playerCards[cardNumber].configure(image=CDunknownPT, text="")
+    print(cardNumber)
+    cardObjects[cardNumber].losehp(1)
     displayGUI.updateCards(self="")
 
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
@@ -121,14 +124,14 @@ class displayGUI():
         for i in range(5):
             if boardArray[1][i + 5] != "":
                 playerCards[i + 5].configure(
-                    text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_health()) + "                " + str(
-                        cardObjects[i].get_damage()))
+                    text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(
+                        cardObjects[i].get_health()))
             if boardArray[1][i + 5] == "":
                 playerCards[i + 5].configure(text="")
         for i in range(5):
             if boardArray[0][i] != "":
-                print((cardObjects[i+5].get_health())+ " " +(cardObjects[i+5].get_damage()))
-                playerCards[1].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i+5].get_health()) + "                " + str(cardObjects[i].get_damage()))
+                print(str(cardObjects[i+5].get_damage())+ " " +str(cardObjects[i+5].get_health()))
+                playerCards[1].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i+5].get_damage()) + "                " + str(cardObjects[i].get_health()))
             if boardArray[0][i] == "":
                 playerCards[i].configure(text="")
 
