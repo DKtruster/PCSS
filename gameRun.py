@@ -24,14 +24,16 @@ class gameRun:
             print("Preparing combat...")
 
             for i in range (5):
-                print("TURN: "+str(i))
+                #print("TURN: "+str(i))
                 attackCardHP,attackCardDMG = int(gui.cardObjects[i].get_health()), int(gui.cardObjects[i].get_damage())
-                print(str(gui.cardObjects[i].get_name())+" HP: "+str(attackCardHP)+" DMG: "+str(attackCardDMG))
+                #print(str(gui.cardObjects[i].get_name())+" HP: "+str(attackCardHP)+" DMG: "+str(attackCardDMG))
                 defendCardHP, defendCardDMG = int(gui.cardObjects[i+5].get_health()), int(gui.cardObjects[i+5].get_damage())
-                print(str(gui.cardObjects[i+5].get_name())+" HP: "+str(defendCardHP)+" DMG: "+str(defendCardDMG))
+                #print(str(gui.cardObjects[i+5].get_name())+" HP: "+str(defendCardHP)+" DMG: "+str(defendCardDMG))
 
-                print("HOME:" +str(gui.cardObjects[i].get_name())+" lost "+str(defendCardDMG)+" HP")
+                #print("HOME:" +str(gui.cardObjects[i].get_name())+" lost "+str(defendCardDMG)+" HP")
                 gui.cardObjects[i].losehp(defendCardDMG)
-                print("ENEMY:" +str(gui.cardObjects[i+5].get_name())+" lost "+str(attackCardDMG)+" HP")
+                #print("ENEMY:" +str(gui.cardObjects[i+5].get_name())+" lost "+str(attackCardDMG)+" HP")
                 gui.cardObjects[i+5].losehp(attackCardDMG)
                 gui.displayGUI.updateCards("")
+
+                print(str(gui.cardObjects[5].get_health()))

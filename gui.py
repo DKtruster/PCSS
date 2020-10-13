@@ -44,8 +44,7 @@ def shopBuy(shopNumber):
                     cardPlaceStrHold = cards.Cards()
                     cardPlaceStrHold.searchData(str(i))
                     playerCards[c].configure(image=Assets.cardImg[i])
-                    playerCards[c].configure(
-                        text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
+                    playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
                     boardArray[c] = cardPlaceStrHold.get_name()
                     if len(cardObjects) > c:
                         cardObjects[c] = cardPlaceStrHold
@@ -78,7 +77,7 @@ def endRound():
                 playerCards[c+5].configure(image=Assets.cardImg[rand])
                 playerCards[c+5].configure(
                     text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-                boardArray[c] = cardPlaceStrHold.get_name()
+                boardArray[c+5] = cardPlaceStrHold.get_name()
                 if len(cardObjects) > c+5:
                     cardObjects[c+5] = cardPlaceStrHold
                 cardObjects.append(cardPlaceStrHold)
@@ -123,8 +122,8 @@ class displayGUI():
     def updateCards(self):
         for i in range(10):
             if boardArray[i] != "":
-                print("CardObjectsLen: " + str(len(cardObjects)))
                 playerCards[i].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(cardObjects[i].get_health()))
+                print(str(i)+" NAME: "+str(cardObjects[i].get_name())+" HP: "+str(cardObjects[i].get_health())+" DMG: "+str(cardObjects[i].get_damage()))
 
     def setup(self):
         for i in range(10):
