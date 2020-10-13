@@ -11,7 +11,7 @@ window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], [["", "", "", "", ""],["", "", "", "", "", "", "", "", "", ""]], ["", "", "", "", ""]
+cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "","", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
 cardImg = []
 
 for i in range(len(Assets.cardImg)):
@@ -38,15 +38,15 @@ def shopBuy(shopNumber):
     for i in range(3):
         if shopArray[shopNumber] == i:
             for c in range(5):
-                if (boardArray[1][c + 5] == ""):
+                if (boardArray[c] == ""):
                     cardPlaceStrHold = "cardPlace" + str(c)
                     # print(cardPlaceStrHold)
                     cardPlaceStrHold = cards.Cards()
                     cardPlaceStrHold.searchData(str(i))
-                    playerCards[c + 5].configure(image=Assets.cardImg[i])
-                    playerCards[c + 5].configure(
+                    playerCards[c].configure(image=Assets.cardImg[i])
+                    playerCards[c].configure(
                         text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-                    boardArray[1][c + 5] = cardPlaceStrHold.get_name()
+                    boardArray[c] = cardPlaceStrHold.get_name()
                     if len(cardObjects) > c:
                         cardObjects[c] = cardPlaceStrHold
                     cardObjects.append(cardPlaceStrHold)
@@ -67,22 +67,22 @@ def shopRandom():
 
 def endRound():
     #shopRandom()
+    print("CardObjectsLength: " + str(len(cardObjects)))
     if len(cardObjects)<6:
         for c in range(5):
             rand = random.randint(0, 2)
-            if (boardArray[0][c] == ""):
+            if (boardArray[c+5] == ""):
                 cardPlaceStrHold = "cardPlace" + str(c)
                 cardPlaceStrHold = cards.Cards()
                 cardPlaceStrHold.searchData(str(rand))
-                playerCards[c].configure(image=Assets.cardImg[rand])
-                playerCards[c].configure(
+                playerCards[c+5].configure(image=Assets.cardImg[rand])
+                playerCards[c+5].configure(
                     text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-                boardArray[0][c] = cardPlaceStrHold.get_name()
+                boardArray[c] = cardPlaceStrHold.get_name()
                 if len(cardObjects) > c+5:
                     cardObjects[c+5] = cardPlaceStrHold
                 cardObjects.append(cardPlaceStrHold)
                 print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
-    print("test111")
     displayGUI.updateCards("")
     gameRun.loadCombat("", boardArray)
 
@@ -95,10 +95,10 @@ def cardSelect(PlayerSelect, cardNumber):
     displayGUI.updateCards(self="")
 
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
-    print(boardArray[0][0] + " " + boardArray[0][1] + " " + boardArray[0][2] + " " + boardArray[0][3] + " " +
-          boardArray[0][4])
-    print(boardArray[1][5] + " " + boardArray[1][6] + " " + boardArray[1][7] + " " + boardArray[1][8] + " " +
-          boardArray[1][9])
+    print(boardArray[0] + " " + boardArray[1] + " " + boardArray[2] + " " + boardArray[3] + " " +
+          boardArray[4])
+    print(boardArray[5] + " " + boardArray[6] + " " + boardArray[7] + " " + boardArray[8] + " " +
+          boardArray[9])
 
 
 class displayGUI():
@@ -107,9 +107,9 @@ class displayGUI():
 
         for i in range(10):
             if i < 5:
-                playerCards[i].place(relx=1, x=-80 - (i * 120), y=100, anchor=NE)
+                playerCards[i].place(relx=1, x=-720 - ((i - 5) * 120), y=350, anchor=NE)
             if i >= 5:
-                playerCards[i].place(relx=1, x=-80 - ((i - 5) * 120), y=350, anchor=NE)
+                playerCards[i].place(relx=1, x=480 - (i * 120), y=100, anchor=NE)
 
         for i in range(5):
             shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
@@ -121,20 +121,10 @@ class displayGUI():
         window.mainloop()
 
     def updateCards(self):
-        for i in range(5):
-            if boardArray[1][i + 5] != "":
-                playerCards[i + 5].configure(
-                    text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(
-                        cardObjects[i].get_health()))
-            if boardArray[1][i + 5] == "":
-                playerCards[i + 5].configure(text="")
-        for i in range(5):
-            if boardArray[0][i] != "":
-                print(str(cardObjects[i+5].get_damage())+ " " +str(cardObjects[i+5].get_health()))
-                playerCards[1].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i+5].get_damage()) + "                " + str(cardObjects[i].get_health()))
-            if boardArray[0][i] == "":
-                playerCards[i].configure(text="")
-
+        for i in range(10):
+            if boardArray[i] != "":
+                print("CardObjectsLen: " + str(len(cardObjects)))
+                playerCards[i].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(cardObjects[i].get_health()))
 
     def setup(self):
         for i in range(10):
