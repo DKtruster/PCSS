@@ -11,14 +11,14 @@ window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "","", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
+cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "","", "", "", "", ""], ["", "", "", "", ""]
 cardImg = []
 
-for i in range(len(Assets.cardImg)):
-    Assets.cardImg[i] = ImageTk.PhotoImage(Assets.cardImg[i])
+for x in range(len(Assets.cardImg)):
+    Assets.cardImg[x] = ImageTk.PhotoImage(Assets.cardImg[x])
 
-for i in range(len(Assets.shopImg)):
-    Assets.shopImg[i] = ImageTk.PhotoImage(Assets.shopImg[i])
+for x in range(len(Assets.shopImg)):
+    Assets.shopImg[x] = ImageTk.PhotoImage(Assets.shopImg[x])
 
 # LOADING IMAGES
 bgPT = ImageTk.PhotoImage(Assets.bg1)
@@ -35,24 +35,24 @@ runCheck = False
 
 def shopBuy(shopNumber):
     cardPlaceStrHold = ""
-    for i in range(3):
-        if shopArray[shopNumber] == i:
-            for c in range(5):
-                if (boardArray[c] == ""):
-                    cardPlaceStrHold = "cardPlace" + str(c)
-                    # print(cardPlaceStrHold)
-                    cardPlaceStrHold = cards.Cards()
-                    cardPlaceStrHold.searchData(str(i))
-                    playerCards[c].configure(image=Assets.cardImg[i])
-                    playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-                    boardArray[c] = cardPlaceStrHold.get_name()
-                    if len(cardObjects) > c:
-                        cardObjects[c] = cardPlaceStrHold
-                    cardObjects.append(cardPlaceStrHold)
-                    print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
-                    return
-        if i == 2:
-            print("System message: No more capacity")
+    if len(cardObjects) < 5:
+        for i in range(3):
+            if shopArray[shopNumber] == i:
+                for c in range(5):
+                    if (boardArray[c] == ""):
+                        cardPlaceStrHold = "cardPlace" + str(c)
+                        cardPlaceStrHold = cards.Cards()
+                        cardPlaceStrHold.searchData(str(i))
+                        playerCards[c].configure(image=Assets.cardImg[i])
+                        playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
+                        boardArray[c] = cardPlaceStrHold.get_name()
+                        if len(cardObjects) > c:
+                            cardObjects[c] = cardPlaceStrHold
+                        cardObjects.append(cardPlaceStrHold)
+                        print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
+                        return
+            if i == 2:
+                print("System message: No more capacity")
 
 
 def shopRandom():
@@ -65,8 +65,8 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
+    gameRunning = True
     #shopRandom()
-    print("CardObjectsLength: " + str(len(cardObjects)))
     if len(cardObjects)<6:
         for c in range(5):
             rand = random.randint(0, 2)
@@ -83,14 +83,13 @@ def endRound():
                 cardObjects.append(cardPlaceStrHold)
                 print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
     displayGUI.updateCards("")
+    print("LengthBoard: " + str(len(boardArray)))
     gameRun.loadCombat("", boardArray)
 
 
 def cardSelect(PlayerSelect, cardNumber):
-    #boardArray[PlayerSelect - 1][cardNumber] = ""
-    #playerCards[cardNumber].configure(image=CDunknownPT, text="")
-    print(cardNumber)
-    cardObjects[cardNumber].losehp(1)
+    boardArray[PlayerSelect - 1][cardNumber] = ""
+    playerCards[cardNumber].configure(image=CDunknownPT, text="")
     displayGUI.updateCards(self="")
 
     print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
@@ -98,7 +97,6 @@ def cardSelect(PlayerSelect, cardNumber):
           boardArray[4])
     print(boardArray[5] + " " + boardArray[6] + " " + boardArray[7] + " " + boardArray[8] + " " +
           boardArray[9])
-
 
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
@@ -121,23 +119,23 @@ class displayGUI():
 
     def updateCards(self):
         for i in range(10):
+            if int(cardObjects[i].get_health())<1:
+                boardArray[i]=""
+
             if boardArray[i] != "":
                 playerCards[i].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(cardObjects[i].get_health()))
-                print(str(i)+" NAME: "+str(cardObjects[i].get_name())+" HP: "+str(cardObjects[i].get_health())+" DMG: "+str(cardObjects[i].get_damage()))
+            if boardArray[i] == "":
+                playerCards[i].configure(text="", image=CDunknownPT)
 
     def setup(self):
         for i in range(10):
             stringHolder = "cardHolder" + str(i)
 
             if i < 5:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white",
-                                         compound=tk.CENTER,
-                                         command=lambda holder=i: cardSelect(1, holder))
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(1, holder))
                 playerCards.append(stringHolder)
             else:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white",
-                                         compound=tk.CENTER,
-                                         command=lambda holder=i: cardSelect(2, holder))
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(2, holder))
                 playerCards.append(stringHolder)
 
         for i in range(5):

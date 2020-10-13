@@ -1,18 +1,35 @@
 import gui
+import random
+
+def updatePlayersHP(board):
+    playerOneCount = 0
+    playerTwoCount = 0
+    playersAlive = [[],[]]
+
+    for i in range(5):
+        if board[i] != "":
+            playerOneCount = playerOneCount + 1
+            playersAlive[0].append(i)
+
+    for i in range(5):
+        if board[i + 5] != "":
+            playerTwoCount = playerTwoCount + 1
+            playersAlive[1].append(i+5)
+
+    print("Your cards:")
+    for i in range(len(playersAlive[0])):
+        print(playersAlive[0][i])
+    print("Enemy cards:")
+    for i in range(len(playersAlive[1])):
+        print(playersAlive[1][i])
+
+    return playersAlive, playerOneCount, playerTwoCount
+
 
 class gameRun:
     def loadCombat(self, boardArray):
-        playerOneCount = 0
-        playerTwoCount = 0
-
-        # Counts the amount of cards each player have
-        for i in range(5):
-            if boardArray[i] != "":
-                playerOneCount = playerOneCount + 1
-
-        for i in range(5):
-            if boardArray[i + 5] != "":
-                playerTwoCount = playerTwoCount + 1
+        playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArray)
+        print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
 
         # Only starts the combat if one of the two players have a card on the deck
         if playerOneCount > 0 or playerTwoCount>0:
@@ -23,17 +40,21 @@ class gameRun:
 
             print("Preparing combat...")
 
-            for i in range (5):
-                #print("TURN: "+str(i))
-                attackCardHP,attackCardDMG = int(gui.cardObjects[i].get_health()), int(gui.cardObjects[i].get_damage())
-                #print(str(gui.cardObjects[i].get_name())+" HP: "+str(attackCardHP)+" DMG: "+str(attackCardDMG))
-                defendCardHP, defendCardDMG = int(gui.cardObjects[i+5].get_health()), int(gui.cardObjects[i+5].get_damage())
-                #print(str(gui.cardObjects[i+5].get_name())+" HP: "+str(defendCardHP)+" DMG: "+str(defendCardDMG))
+            for x in range(2):
+                for i in range (len(playersAlive[x])):
+                    playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArray)
+                    if x == 0:
+                        rand = random.randint(5, (len(playersAlive[1]) + 4))
+                        if i == 0: print("YOUR TURN")
+                    if x == 1:
+                        rand = random.randint(0, (len(playersAlive[0]) - 1))
+                        if i == 0: print("ENEMY TURN")
 
-                #print("HOME:" +str(gui.cardObjects[i].get_name())+" lost "+str(defendCardDMG)+" HP")
-                gui.cardObjects[i].losehp(defendCardDMG)
-                #print("ENEMY:" +str(gui.cardObjects[i+5].get_name())+" lost "+str(attackCardDMG)+" HP")
-                gui.cardObjects[i+5].losehp(attackCardDMG)
-                gui.displayGUI.updateCards("")
+                    print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " attacks " + gui.cardObjects[rand].get_name())
 
-                print(str(gui.cardObjects[5].get_health()))
+                    attackCardHP, attackCardDMG = int(gui.cardObjects[playersAlive[x][i]].get_health()), int(gui.cardObjects[playersAlive[x][i]].get_damage())
+                    defendCardHP, defendCardDMG = int(gui.cardObjects[rand].get_health()), int(gui.cardObjects[rand].get_damage())
+
+                    gui.cardObjects[playersAlive[x][i]].losehp(defendCardDMG)
+                    gui.cardObjects[rand].losehp(attackCardDMG)
+            gui.displayGUI.updateCards(self)
