@@ -16,13 +16,6 @@ def updatePlayersHP(board):
             playerTwoCount = playerTwoCount + 1
             playersAlive[1].append(i+5)
 
-    print("Your cards:")
-    for i in range(len(playersAlive[0])):
-        print(playersAlive[0][i])
-    print("Enemy cards:")
-    for i in range(len(playersAlive[1])):
-        print(playersAlive[1][i])
-
     return playersAlive, playerOneCount, playerTwoCount
 
 
@@ -41,20 +34,29 @@ class gameRun:
             print("Preparing combat...")
 
             for x in range(2):
+                playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(gui.boardArray)
                 for i in range (len(playersAlive[x])):
-                    playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArray)
                     if x == 0:
-                        rand = random.randint(5, (len(playersAlive[1]) + 4))
-                        if i == 0: print("YOUR TURN")
+                        if len(playersAlive[1])>0:
+                            rand = random.randint(0, (len(playersAlive[1])+4))
+                        if i == 0:
+                            print("YOUR TURN")
                     if x == 1:
-                        rand = random.randint(0, (len(playersAlive[0]) - 1))
-                        if i == 0: print("ENEMY TURN")
+                        if len(playersAlive[0])>0:
+                            rand = random.randint(0, (len(playersAlive[0]) - 1))
+                        if i == 0:
+                            print("ENEMY TURN")
 
-                    print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " attacks " + gui.cardObjects[rand].get_name())
+                    #print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " attacks "+ gui.cardObjects[rand].get_name())
 
                     attackCardHP, attackCardDMG = int(gui.cardObjects[playersAlive[x][i]].get_health()), int(gui.cardObjects[playersAlive[x][i]].get_damage())
                     defendCardHP, defendCardDMG = int(gui.cardObjects[rand].get_health()), int(gui.cardObjects[rand].get_damage())
 
+                    if attackCardDMG > defendCardHP:
+                        print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " kills " + gui.cardObjects[rand].get_name())
+                    if attackCardHP < defendCardDMG:
+                        print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " dies to " + gui.cardObjects[rand].get_name()+ " in an attempt to kill")
+
                     gui.cardObjects[playersAlive[x][i]].losehp(defendCardDMG)
                     gui.cardObjects[rand].losehp(attackCardDMG)
-            gui.displayGUI.updateCards(self)
+                gui.displayGUI.updateCards("")
