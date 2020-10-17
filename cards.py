@@ -6,6 +6,7 @@ dataLoader = np.genfromtxt('origins.txt', dtype='str')
 # TO-DO: Make 17 more cards
 
 def sortCards():
+    dataSortHold = []
     print("Unsorted data: ")
     for i in range (len(dataLoader)):
         print(dataLoader[i])
@@ -21,6 +22,7 @@ def sortCards():
     print("Sorted data: ")
     for i in range (len(dataLoader)):
         print(dataLoader[i])
+    print("Sorted "+str(len(dataLoader))+" lines of data")
     return True
 
 
