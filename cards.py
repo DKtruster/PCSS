@@ -14,7 +14,7 @@ def sortCards():
     # Next 6 lines are made with help from: https://www.geeksforgeeks.org/bubble-sort/
     for lines in range(len(dataLoader)):
         for i in range(0, len(dataLoader)-lines-1):
-            if dataLoader[i][0]>dataLoader[i+1][0]:
+            if int(dataLoader[i][0])>int(dataLoader[i+1][0]):
                 dataSortHold = dataLoader[i].copy()
                 dataLoader[i] = dataLoader[i+1]
                 dataLoader[i + 1] = dataSortHold
@@ -37,15 +37,31 @@ class Cards:
 
     # TO-DO: Add binary search
     def searchData(self, cardNumber):
-        for i in range (len(dataLoader)):
-            if dataLoader[i][0]==cardNumber:
-                self.__cardnumber = dataLoader[i][0]
-                self.__price = dataLoader[i][1]
-                self.__name = dataLoader[i][2]
-                self.__origin = dataLoader[i][3]
-                self.__health = dataLoader[i][5]
-                self.__damage = dataLoader[i][4]
-                return
+        middleLen = round(len(dataLoader) / 2)-1
+        # print("MiddleLength: "+str(middleLen)+ " CardNumber  "+cardNumber)
+        middleNum = dataLoader[middleLen][0]
+        if cardNumber < middleNum:
+            for i in range (0,middleLen):
+                if dataLoader[i][0]==cardNumber:
+                    self.__cardnumber = dataLoader[i][0]
+                    self.__price = dataLoader[i][1]
+                    self.__name = dataLoader[i][2]
+                    self.__origin = dataLoader[i][3]
+                    self.__health = dataLoader[i][5]
+                    self.__damage = dataLoader[i][4]
+                    # print("Found: "+cardNumber+" in lower array stack")
+                    return
+        if int(cardNumber) >= int(middleNum):
+            for i in range (int(middleNum),len(dataLoader)):
+                if dataLoader[i][0]==cardNumber:
+                    self.__cardnumber = dataLoader[i][0]
+                    self.__price = dataLoader[i][1]
+                    self.__name = dataLoader[i][2]
+                    self.__origin = dataLoader[i][3]
+                    self.__health = dataLoader[i][5]
+                    self.__damage = dataLoader[i][4]
+                    # print("Found: "+cardNumber + " in upper array stack")
+                    return
 
     def get_name(self):
         return self.__name
