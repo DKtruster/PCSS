@@ -48,7 +48,7 @@ class gameRun:
                             if attackCardDMG > defendCardHP:
                                 print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " kills " + gui.cardObjects[rand+5].get_name())
                             if attackCardHP < defendCardDMG:
-                                print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " dies to " + gui.cardObjects[rand+5].get_name()+ " in an attempt to kill")
+                                print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " dies in an attempt to kill " + gui.cardObjects[rand+5].get_name())
 
                             gui.cardObjects[playersAlive[x][i]].losehp(defendCardDMG)
                             gui.cardObjects[playersAlive[1][rand]].losehp(attackCardDMG)
@@ -65,7 +65,7 @@ class gameRun:
                             if attackCardDMG > defendCardHP:
                                 print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " kills " + gui.cardObjects[rand].get_name())
                             if attackCardHP < defendCardDMG:
-                                print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " dies to " + gui.cardObjects[rand].get_name()+ " in an attempt to kill")
+                                print(str(gui.cardObjects[playersAlive[x][i]].get_name()) + " dies in an attempt to kill " + gui.cardObjects[rand].get_name())
 
                             gui.cardObjects[playersAlive[x][i]].losehp(defendCardDMG)
                             gui.cardObjects[playersAlive[0][rand]].losehp(attackCardDMG)

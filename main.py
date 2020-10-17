@@ -1,11 +1,11 @@
 from gui import displayGUI
-from cards import loadCards
 import cards
 import threading
 
 class main:
     # SETUP
 
+    cards.sortCards()
     displayGUI.setup("")
     displayGUI(True)
 

@@ -11,7 +11,7 @@ window = tk.Tk()
 window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
-cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "","", "", "", "", ""], ["", "", "", "", ""]
+cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
 cardImg = []
 
 for x in range(len(Assets.cardImg)):
@@ -87,15 +87,18 @@ def endRound():
 
 
 def cardSelect(PlayerSelect, cardNumber):
-    boardArray[PlayerSelect - 1][cardNumber] = ""
-    playerCards[cardNumber].configure(image=CDunknownPT, text="")
-    displayGUI.updateCards(self="")
+    if len(cardObjects) < 6:
+        boardArray[cardNumber] = ""
+        playerCards[cardNumber].configure(image=CDunknownPT, text="")
+        displayGUI.updateCards(self="")
 
-    print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
-    print(boardArray[0] + " " + boardArray[1] + " " + boardArray[2] + " " + boardArray[3] + " " +
-          boardArray[4])
-    print(boardArray[5] + " " + boardArray[6] + " " + boardArray[7] + " " + boardArray[8] + " " +
-          boardArray[9])
+        print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
+        print(boardArray[0] + " " + boardArray[1] + " " + boardArray[2] + " " + boardArray[3] + " " +
+              boardArray[4])
+        print(boardArray[5] + " " + boardArray[6] + " " + boardArray[7] + " " + boardArray[8] + " " +
+              boardArray[9])
+    if len(cardObjects) > 5:
+        print("System message: Can't make any board changes while the game is running")
 
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
