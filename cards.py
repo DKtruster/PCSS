@@ -30,7 +30,7 @@ class Cards:
     # TO-DO: Add binary search
     def searchData(self, cardNumber):
         loadCards()
-        for i in range (len(cardNames)-1):
+        for i in range (len(cardNames)):
             if cardNames[i][0]==cardNumber:
                 self.__cardnumber = cardNames[i][0]
                 self.__price = cardNames[i][1]

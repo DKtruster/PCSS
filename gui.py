@@ -44,7 +44,7 @@ def shopBuy(shopNumber):
                         cardPlaceStrHold = cards.Cards()
                         cardPlaceStrHold.searchData(str(i))
                         playerCards[c].configure(image=Assets.cardImg[i])
-                        playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
+                        playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(cardPlaceStrHold.get_health()))
                         boardArray[c] = cardPlaceStrHold.get_name()
                         if len(cardObjects) > c:
                             cardObjects[c] = cardPlaceStrHold
@@ -81,9 +81,8 @@ def endRound():
                 if len(cardObjects) > c+5:
                     cardObjects[c+5] = cardPlaceStrHold
                 cardObjects.append(cardPlaceStrHold)
-                print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
+                print("System message: Enemy Purchased: " + str(cardPlaceStrHold.get_name()))
     displayGUI.updateCards("")
-    print("LengthBoard: " + str(len(boardArray)))
     gameRun.loadCombat("", boardArray)
 
 
