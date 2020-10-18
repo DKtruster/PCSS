@@ -65,8 +65,10 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
-    gameRunning = True
-    #shopRandom()
+    while len(cardObjects)<5:
+        rand = random.randint(0, 4)
+        shopBuy(rand)
+
     if len(cardObjects)<6:
         for c in range(5):
             rand = random.randint(0, 3)
