@@ -1,6 +1,6 @@
 # PCSS-AutoCardgame
 
-This program is an automatic card game, with ancient warlords as a theme.
+This program is an automatic card game, with ancient warlords as its theme.
 
 Start the program by running the main.py file.
 
