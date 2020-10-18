@@ -12,13 +12,14 @@ window.title("PCSS Project - Lukas")
 window.geometry("1200x700")
 
 cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
-cardImg = []
 
 for x in range(len(Assets.cardImg)):
     Assets.cardImg[x] = ImageTk.PhotoImage(Assets.cardImg[x])
 
 for x in range(len(Assets.shopImg)):
     Assets.shopImg[x] = ImageTk.PhotoImage(Assets.shopImg[x])
+
+cardImgLen = len(Assets.cardImg)-1
 
 # LOADING IMAGES
 bgPT = ImageTk.PhotoImage(Assets.bg1)
@@ -36,7 +37,7 @@ runCheck = False
 def shopBuy(shopNumber):
     cardPlaceStrHold = ""
     if len(cardObjects) < 5:
-        for i in range(4):
+        for i in range(cardImgLen+1):
             if shopArray[shopNumber] == i:
                 for c in range(5):
                     if (boardArray[c] == ""):
@@ -57,7 +58,7 @@ def shopBuy(shopNumber):
 
 def shopRandom():
     for i in range(5):
-        rand = random.randint(0, 3)
+        rand = random.randint(0, cardImgLen)
         shopCards[i].configure(image=Assets.shopImg[rand])
         shopArray[i] = rand
     if len(cardObjects) > 0:
@@ -66,12 +67,12 @@ def shopRandom():
 
 def endRound():
     while len(cardObjects)<5:
-        rand = random.randint(0, 4)
+        rand = random.randint(0, cardImgLen)
         shopBuy(rand)
 
     if len(cardObjects)<6:
         for c in range(5):
-            rand = random.randint(0, 3)
+            rand = random.randint(0, cardImgLen)
             if (boardArray[c+5] == ""):
                 cardPlaceStrHold = "cardPlace" + str(c)
                 cardPlaceStrHold = cards.Cards()

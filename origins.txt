@@ -3,9 +3,9 @@
 2 1 Sun_Zhu Chinese 3 30
 3 1 So_Chan Chinese 5 15
 7 1 text text 2 2
-6 1 text text 2 2
+6 1 Sun_Qi Chinese 2 45
 9 1 text text 2 2
-5 1 text text 2 2
-4 1 text text 2 2
+5 1 Wu_Shi Chinese 5 15
+4 1 Cao_Cao Chinese 2 35
 1 1 Caesar Roman 4 20
 10 1 text text 2 2

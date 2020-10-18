@@ -32,5 +32,20 @@ cardImg.append(CDchinese2)
 SPchinese2 = Image.open("Assets/chinese2shop.jpg")
 shopImg.append(SPchinese2)
 
+CDchinese3 = Image.open("Assets/chinese3lowUI.jpg")
+cardImg.append(CDchinese3)
+SPchinese3 = Image.open("Assets/chinese3shop.jpg")
+shopImg.append(SPchinese3)
+
+CDchinese4 = Image.open("Assets/chinese4lowUI.jpg")
+cardImg.append(CDchinese4)
+SPchinese4 = Image.open("Assets/chinese4shop.jpg")
+shopImg.append(SPchinese4)
+
+CDchinese5 = Image.open("Assets/chinese5lowUI.jpg")
+cardImg.append(CDchinese5)
+SPchinese5 = Image.open("Assets/chinese5shop.jpg")
+shopImg.append(SPchinese5)
+
 CDunknown = Image.open("Assets/unknown1low.jpg")
 assetsImg.append(bg1)
