@@ -4,6 +4,7 @@ dataLoader = np.genfromtxt('origins.txt', dtype='str')
 
 # TO-DO: Implement graphics for more cards
 
+
 def sortCards():
     dataSortHold = []
     print("Unsorted data: ")
