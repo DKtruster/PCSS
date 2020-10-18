@@ -36,7 +36,7 @@ runCheck = False
 def shopBuy(shopNumber):
     cardPlaceStrHold = ""
     if len(cardObjects) < 5:
-        for i in range(3):
+        for i in range(4):
             if shopArray[shopNumber] == i:
                 for c in range(5):
                     if (boardArray[c] == ""):
@@ -57,7 +57,7 @@ def shopBuy(shopNumber):
 
 def shopRandom():
     for i in range(5):
-        rand = random.randint(0, 2)
+        rand = random.randint(0, 3)
         shopCards[i].configure(image=Assets.shopImg[rand])
         shopArray[i] = rand
     if len(cardObjects) > 0:
@@ -69,7 +69,7 @@ def endRound():
     #shopRandom()
     if len(cardObjects)<6:
         for c in range(5):
-            rand = random.randint(0, 2)
+            rand = random.randint(0, 3)
             if (boardArray[c+5] == ""):
                 cardPlaceStrHold = "cardPlace" + str(c)
                 cardPlaceStrHold = cards.Cards()
