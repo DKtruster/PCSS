@@ -2,8 +2,7 @@ import numpy as np
 
 dataLoader = np.genfromtxt('origins.txt', dtype='str')
 
-# TO-DO: Implement a sorting algorithm for an unorganised .txt file
-# TO-DO: Make 17 more cards
+# TO-DO: Implement graphics for more cards
 
 def sortCards():
     dataSortHold = []
