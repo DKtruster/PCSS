@@ -1,14 +1,15 @@
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
-from gameRun import gameRun
+# from gameRun import gameRun
 import random
 import cards
 import Assets
+import socket
 
 # WINDOW SETUP
 window = tk.Tk()
-window.title("PCSS Project - Lukas")
+window.title("PCSS Project - Lukas Kristensen")
 window.geometry("1200x700")
 
 cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
@@ -86,7 +87,8 @@ def endRound():
                 cardObjects.append(cardPlaceStrHold)
                 print("System message: Enemy Purchased: " + str(cardPlaceStrHold.get_name()))
     displayGUI.updateCards("")
-    gameRun.loadCombat("", boardArray)
+    # gameRun.loadCombat("", boardArray)
+
 
 
 def cardSelect(PlayerSelect, cardNumber):
@@ -102,6 +104,13 @@ def cardSelect(PlayerSelect, cardNumber):
               boardArray[9])
     if len(cardObjects) > 5:
         print("System message: Can't make any board changes while the game is running")
+
+    # Next 5 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
+    s = socket.socket()
+    port = 20000
+    s.connect(('127.0.0.1',port))
+    print (s.recv(1024))
+    s.close
 
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/

@@ -1,5 +1,24 @@
 import gui
 import random
+import socket
+
+# Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
+s = socket.socket()
+port = 20000
+print("PORT CREATED")
+
+s.bind(('',port))
+print ("Socket binded to %s" %(port))
+
+s.listen(5)
+print("SOCKET LISTENING")
+
+while True:
+    c, addr = s.accept()
+    print("Got information from", addr)
+    output = "Thank you for connecting"
+    c.sendall(output.encode("utf-8"))
+    c.close()
 
 def updatePlayersHP(board):
     playerOneCount = 0
