@@ -5,7 +5,7 @@ import threading
 class main:
     # SETUP
 
-    cards.sortCards()
+    cards.sortCards(True)
     displayGUI.setup("")
     displayGUI(True)
 

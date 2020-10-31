@@ -5,11 +5,12 @@ dataLoader = np.genfromtxt('origins.txt', dtype='str')
 # TO-DO: Implement graphics for more cards
 
 
-def sortCards():
+def sortCards(Log):
     dataSortHold = []
-    print("Unsorted data: ")
-    for i in range (len(dataLoader)):
-        print(dataLoader[i])
+    if Log:
+        print("Unsorted data: ")
+        for i in range (len(dataLoader)):
+            print(dataLoader[i])
 
     # Next 6 lines are made with help from: https://www.geeksforgeeks.org/bubble-sort/
     for lines in range(len(dataLoader)):
@@ -19,10 +20,11 @@ def sortCards():
                 dataLoader[i] = dataLoader[i+1]
                 dataLoader[i + 1] = dataSortHold
 
-    print("Sorted data: ")
-    for i in range (len(dataLoader)):
-        print(dataLoader[i])
-    print("Sorted "+str(len(dataLoader))+" lines of data")
+    if Log:
+        print("Sorted data: ")
+        for i in range (len(dataLoader)):
+            print(dataLoader[i])
+        print("Sorted "+str(len(dataLoader))+" lines of data")
     return True
 
 
@@ -37,8 +39,8 @@ class Cards:
 
     # TO-DO: Add binary search
     def searchData(self, cardNumber):
+        sortCards(False)
         middleLen = round(len(dataLoader) / 2)-1
-        # print("MiddleLength: "+str(middleLen)+ " CardNumber  "+cardNumber)
         middleNum = dataLoader[middleLen][0]
         if cardNumber < middleNum:
             for i in range (0,middleLen):

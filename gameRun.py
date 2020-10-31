@@ -1,9 +1,11 @@
 import gui
 import random
 import socket
+import cards
 
+playerCards = []
 
-def serverSend():
+def serverSend(message):
     # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
     s = socket.socket()
     port = 20000
@@ -18,7 +20,7 @@ def serverSend():
     while True:
         c, addr = s.accept()
         print("Got information from", addr)
-        output = "Thank you for connecting"
+        output = message
         c.sendall(output.encode("utf-8"))
         c.close()
         return True
@@ -29,7 +31,23 @@ def serverReceive():
     print("PORT CREATED SERVER_RECEIVING")
 
     s.connect(('127.0.0.1', port))
-    print (s.recv(1024))
+    msg = s.recv(1024)
+    msg = msg.decode()
+    splitMsg = msg.split(' ')
+    print (splitMsg)
+    s.close()
+
+    nameOutputHold = []
+
+    for i in range (5):
+        strHold = cards.Cards()
+        typeHold = str(splitMsg[i])
+        strHold.searchData(typeHold)
+        nameOutputHold.append(str(strHold.get_name()))
+        playerCards.append(strHold)
+
+    outputMsg = ("Players Sent To Server: "+str(nameOutputHold[0])+" "+str(nameOutputHold[1])+" "+str(nameOutputHold[2])+" "+str(nameOutputHold[3])+" "+str(nameOutputHold[4]))
+    return outputMsg
 
 def updatePlayersHP(board):
     playerOneCount = 0
@@ -112,11 +130,14 @@ class gameRun:
         if playerOneCount == 0 and playerTwoCount == 0:
             print("It's a tie!")
 
-    while True:
-        print("Looping...")
-        get = serverSend()
-        serverReceive()
-        if get:
-            loadCombat("", (1,1,1,1,1,2,2,2,2,2))
-            get = False
+    get = False
+    ifConnected = False
+    msgSend = "Connected to server"
 
+    while True:
+        get = serverSend(msgSend)
+
+        if get:
+            msgSend = serverReceive()
+            loadCombat("", (1, 1, 1, 1, 1, 2, 2, 2, 2, 2))
+            get = False

@@ -36,7 +36,7 @@
       <recent name="C:\Users\lukad\Documents\GitHub\ProjectPCSS" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.gameRun">
     <configuration name="Assets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjectPCSS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,8 +144,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.gameRun" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.gui (1)" />
         <item itemvalue="Python.testing" />
         <item itemvalue="Python.Assets" />
@@ -168,37 +168,45 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603103962947" />
-    <state width="1515" height="149" key="GridCell.Tab.0.bottom" timestamp="1603967855808">
+    <state width="1515" height="277" key="GridCell.Tab.0.bottom" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="149" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603967855808" />
-    <state width="1515" height="149" key="GridCell.Tab.0.center" timestamp="1603967855808">
+    <state width="1515" height="277" key="GridCell.Tab.0.center" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.0.center/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="149" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1603967855808" />
-    <state width="1515" height="149" key="GridCell.Tab.0.left" timestamp="1603967855808">
+    <state width="1515" height="277" key="GridCell.Tab.0.left" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.0.left/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="149" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1603967855808" />
-    <state width="1515" height="149" key="GridCell.Tab.0.right" timestamp="1603967855808">
+    <state width="1515" height="277" key="GridCell.Tab.0.right" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.0.right/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="149" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1603967855808" />
-    <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1603044148471">
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603044148471" />
-    <state width="1515" height="277" key="GridCell.Tab.1.center" timestamp="1603044148471">
+    <state width="1515" height="277" key="GridCell.Tab.1.center" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1603044148471" />
-    <state width="1515" height="277" key="GridCell.Tab.1.left" timestamp="1603044148471">
+    <state width="1515" height="277" key="GridCell.Tab.1.left" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1603044148471" />
-    <state width="1515" height="277" key="GridCell.Tab.1.right" timestamp="1603044148471">
+    <state width="1515" height="277" key="GridCell.Tab.1.right" timestamp="1604180240897">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604180240897" />
     <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1603044148471" />
     <state x="375" y="43" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602942607515">
       <screen x="0" y="0" width="1536" height="864" />
@@ -208,9 +216,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1601114071374" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1603890656184">
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1604178678297">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604178678297" />
     <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1603890656184" />
     <state x="491" y="344" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602595854141">
       <screen x="0" y="0" width="1536" height="864" />
