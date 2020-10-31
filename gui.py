@@ -89,7 +89,25 @@ def endRound():
     displayGUI.updateCards("")
     # gameRun.loadCombat("", boardArray)
 
+def clientServerSend():
+    # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
+    s = socket.socket()
+    port = 20001
+    print("PORT CREATED SERVER_SENDING")
 
+    s.bind(('', port))
+    print("Socket binded to %s" % (port))
+
+    s.listen(5)
+    print("SOCKET LISTENING")
+
+    while True:
+        c, addr = s.accept()
+        print("Got information from", addr)
+        output = "Information from client"
+        c.sendall(output.encode("utf-8"))
+        # c.close()
+        return True
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:
@@ -110,7 +128,8 @@ def cardSelect(PlayerSelect, cardNumber):
     port = 20000
     s.connect(('127.0.0.1',port))
     print (s.recv(1024))
-    s.close
+    s.close()
+    clientServerSend()
 
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/

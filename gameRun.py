@@ -2,23 +2,34 @@ import gui
 import random
 import socket
 
-# Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
-s = socket.socket()
-port = 20000
-print("PORT CREATED")
 
-s.bind(('',port))
-print ("Socket binded to %s" %(port))
+def serverSend():
+    # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
+    s = socket.socket()
+    port = 20000
+    print("PORT CREATED SERVER_SENDING")
 
-s.listen(5)
-print("SOCKET LISTENING")
+    s.bind(('', port))
+    print("Socket binded to %s" % (port))
 
-while True:
-    c, addr = s.accept()
-    print("Got information from", addr)
-    output = "Thank you for connecting"
-    c.sendall(output.encode("utf-8"))
-    c.close()
+    s.listen(5)
+    print("SOCKET LISTENING")
+
+    while True:
+        c, addr = s.accept()
+        print("Got information from", addr)
+        output = "Thank you for connecting"
+        c.sendall(output.encode("utf-8"))
+        c.close()
+        return True
+
+def serverReceive():
+    s = socket.socket()
+    port = 20001
+    print("PORT CREATED SERVER_RECEIVING")
+
+    s.connect(('127.0.0.1', port))
+    print (s.recv(1024))
 
 def updatePlayersHP(board):
     playerOneCount = 0
@@ -41,7 +52,7 @@ def updatePlayersHP(board):
 class gameRun:
     def loadCombat(self, boardArray):
         playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArray)
-        # print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
+        print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
 
         # Only starts the combat if one of the two players have a card on the deck
         if playerOneCount > 0 and playerTwoCount>0:
@@ -89,7 +100,7 @@ class gameRun:
                             gui.cardObjects[playersAlive[x][i]].losehp(defendCardDMG)
                             gui.cardObjects[playersAlive[0][rand]].losehp(attackCardDMG)
 
-                gui.displayGUI.updateCards("")
+                # gui.displayGUI.updateCards("")
 
         playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(gui.boardArray)
         if playerOneCount > 0 and playerTwoCount == 0:
@@ -100,3 +111,12 @@ class gameRun:
 
         if playerOneCount == 0 and playerTwoCount == 0:
             print("It's a tie!")
+
+    while True:
+        print("Looping...")
+        get = serverSend()
+        serverReceive()
+        if get:
+            loadCombat("", (1,1,1,1,1,2,2,2,2,2))
+            get = False
+
