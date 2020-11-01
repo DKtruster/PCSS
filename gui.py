@@ -5,7 +5,6 @@ import random
 import cards
 import Assets
 import socket
-import multiprocessing
 import serverClient
 
 # WINDOW SETUP
@@ -91,11 +90,7 @@ def endRound():
     displayGUI.updateCards("")
 
     serverClient.clientServerReceive()
-    test = False
-    test = serverClient.clientServerSend(boardArray)
-    if test:
-        thread1 = multiprocessing.Process(target=serverClient.clientServerSend)
-        thread1.start()
+    serverClient.clientServerSend(boardArray)
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:
