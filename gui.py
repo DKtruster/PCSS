@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 import random
 import cards
 import Assets
-import socket
 import serverClient
 
 # WINDOW SETUP

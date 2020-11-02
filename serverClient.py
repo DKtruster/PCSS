@@ -1,5 +1,6 @@
 import socket
-import multiprocessing
+import threading
+
 
 def clientServerReceive():
     s = socket.socket()
@@ -9,6 +10,10 @@ def clientServerReceive():
     s.close()
 
 def clientServerSend(boardArray):
+    threadSend = threading.Thread(target=serverSend, args=(boardArray,))
+    threadSend.start()
+
+def serverSend(boardArray):
     # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
     s = socket.socket()
     port = 20001
