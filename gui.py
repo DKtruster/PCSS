@@ -43,6 +43,7 @@ def shopBuy(shopNumber):
                     if (boardArray[c] == ""):
                         cardPlaceStrHold = "cardPlace" + str(c)
                         cardPlaceStrHold = cards.Cards()
+                        print("Searching data for:",i)
                         cardPlaceStrHold.searchData(str(i))
                         playerCards[c].configure(image=Assets.cardImg[i])
                         playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(cardPlaceStrHold.get_health()))

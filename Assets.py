@@ -47,5 +47,25 @@ cardImg.append(CDchinese5)
 SPchinese5 = Image.open("Assets/chinese5shop.jpg")
 shopImg.append(SPchinese5)
 
+CDroman2 = Image.open("Assets/roman2lowUI.jpg")
+cardImg.append(CDroman2)
+SProman2 = Image.open("Assets/roman2shop.jpg")
+shopImg.append(SProman2)
+
+CDroman3 = Image.open("Assets/roman3lowUI.jpg")
+cardImg.append(CDroman3)
+SProman3 = Image.open("Assets/roman3shop.jpg")
+shopImg.append(SProman3)
+
+CDroman4 = Image.open("Assets/roman4lowUI.jpg")
+cardImg.append(CDroman4)
+SProman4 = Image.open("Assets/roman4shop.jpg")
+shopImg.append(SProman4)
+
+CDroman5 = Image.open("Assets/roman5lowUI.jpg")
+cardImg.append(CDroman5)
+SProman5 = Image.open("Assets/roman5shop.jpg")
+shopImg.append(SProman5)
+
 CDunknown = Image.open("Assets/unknown1low.jpg")
 assetsImg.append(bg1)
