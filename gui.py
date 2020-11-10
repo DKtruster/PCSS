@@ -5,6 +5,8 @@ import random
 import cards
 import Assets
 import serverClient
+import time
+import threading
 
 # WINDOW SETUP
 window = tk.Tk()
@@ -33,6 +35,13 @@ CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
 
+def moveCard():
+    for i in range (11):
+        playerCards[0].place(y = 350-(i*8))
+        time.sleep(0.0001)
+    for i in range (11):
+        playerCards[0].place(y = 270+(i*8))
+        time.sleep(0.0001)
 
 def shopBuy(shopNumber):
     cardPlaceStrHold = ""
@@ -68,6 +77,8 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
+    threadSend = threading.Thread(target=moveCard)
+    threadSend.start()
     while len(cardObjects)<5:
         rand = random.randint(0, cardImgLen)
         shopBuy(rand)
