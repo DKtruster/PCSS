@@ -1,16 +1,18 @@
 import socket
 import threading
-
+import time
 
 def clientServerReceive():
     s = socket.socket()
     port = 20000
     s.connect(('127.0.0.1', port))
     print(s.recv(1024))
-    s.close()
+    time.sleep(1)
+    clientServerSend()
+    # s.close()
 
-def clientServerSend(boardArray):
-    threadSend = threading.Thread(target=serverSend, args=(boardArray,))
+def clientServerSend():
+    threadSend = threading.Thread(target=clientServerReceive)
     threadSend.start()
 
 def serverSend(boardArray):

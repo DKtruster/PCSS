@@ -42,20 +42,26 @@ class Cards:
         sortCards(False)
         middleLen = round(len(dataLoader) / 2)-1
         middleNum = dataLoader[middleLen][0]
-        if cardNumber < middleNum:
+        # print("Searching for:",cardNumber,"middle num:",middleNum)
+        if int(cardNumber) < int(middleNum):
+            # print("Smaller than middleNum")
             for i in range (0,middleLen):
-                if dataLoader[i][0]==cardNumber:
+                # print("Checking dataSet:", dataLoader[i][0], cardNumber)
+                if int(dataLoader[i][0]) == int(cardNumber):
+                    # print("Defining card type...")
                     self.__cardnumber = dataLoader[i][0]
                     self.__price = dataLoader[i][1]
                     self.__name = dataLoader[i][2]
                     self.__origin = dataLoader[i][3]
                     self.__health = dataLoader[i][5]
                     self.__damage = dataLoader[i][4]
-                    # print("Found: "+cardNumber+" in lower array stack")
+                    # print("Found:",cardNumber,"in lower array stack")
                     return
-        if int(cardNumber) >= int(middleNum):
+        elif int(cardNumber) >= int(middleNum):
+            # print("Greater than middleNum")
             for i in range (int(middleNum),len(dataLoader)):
-                if dataLoader[i][0]==cardNumber:
+                if int(dataLoader[i][0])==int(cardNumber):
+                    # print("Defining card type...")
                     self.__cardnumber = dataLoader[i][0]
                     self.__price = dataLoader[i][1]
                     self.__name = dataLoader[i][2]
@@ -64,6 +70,8 @@ class Cards:
                     self.__damage = dataLoader[i][4]
                     # print("Found: "+cardNumber + " in upper array stack")
                     return
+
+
 
     def get_name(self):
         return self.__name
@@ -79,6 +87,3 @@ class Cards:
 
     def losehp(self, losthp):
         self.__health = int(self.__health)-losthp
-
-    def test(self):
-        return self.__damage

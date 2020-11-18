@@ -12,6 +12,7 @@ import threading
 window = tk.Tk()
 window.title("PCSS Project - Lukas Kristensen")
 window.geometry("1200x700")
+window.resizable(False, False)
 
 cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
 
@@ -101,7 +102,8 @@ def endRound():
     displayGUI.updateCards("")
 
     serverClient.clientServerReceive()
-    serverClient.clientServerSend(boardArray)
+    # serverClient.clientServerSend()
+    serverClient.serverSend(boardArray)
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:
