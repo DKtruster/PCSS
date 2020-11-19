@@ -5,6 +5,7 @@ import cards
 playerCards = [[],[]]
 boardArray = []
 activeSockets = []
+acceptedSockets = []
 
 def serverSend(message):
     # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
@@ -22,6 +23,7 @@ def serverSend(message):
 
     while True:
         c, addr = activeSockets[0].accept()
+
         print("Got information from", addr)
         output = message
         c.sendall(output.encode("utf-8"))
@@ -53,18 +55,23 @@ def serverReceive():
     for i in range (5):
         strHold = cards.Cards()
         typeHold = random.randint(0,10)
-        strHold.searchData(int(2))
+        strHold.searchData(typeHold)
         # nameOutputHold.append(str(strHold.get_name()))
         playerCards[1].append(strHold)
         boardArray.append(typeHold)
 
+    testSend = ("Server sending back board: "+str(boardArray[5])+" "+str(boardArray[6])+" "+str(boardArray[7])+" "+str(boardArray[8])+" "+str(boardArray[9]))
+    serverSend(testSend)
+
+    # TO-DO: Lav kortene til objekter her, så de kan passes ind i spillet
+
     print("PlayerObjects:",playerCards)
 
     outputMsg = ("Players Sent To Server:",nameOutputHold)
-    return outputMsg, splitMsg
+    return outputMsg, splitMsg, playerCards
 
 def updatePlayersHP(board):
-    playerOneCountTT = 0
+    playerOneCount = 0
     playerTwoCount = 0
     playersAlive = [[],[]]
 
@@ -73,23 +80,27 @@ def updatePlayersHP(board):
 
     try:
         for i in range(5):
-            if board[i] != "":
-                print("Try:AddingOne to",playerOneCountTT)
-                playerOneCountTT += 1
+            print("HPTEST1",board[0][i].get_health())
+            # if board[0][i] != "":
+            if int(board[0][i].get_health()) > 0:
+                print("Except2:AddingOne to",playerOneCount)
+                playerOneCount += 1
                 playersAlive.append(i)
-                print("health:",board[i])
-                print(i,playerCards[0][i].get_health(),playerCards[0][i].get_name())
-    except IndexError:
+                print("health1:",board[0][i])
+                print(1,i,playerCards[0][i].get_health(),playerCards[0][i].get_name())
         for i in range(5):
-            print("HPTEST",board[0][i].get_health())
-            if board[0][i] != "":
-                print("Except:AddingOne to",playerOneCountTT)
-                playerOneCountTT += 1
+            print("HPTEST2",board[1][i].get_health())
+            if int(board[1][i].get_health()) > 0:
+            # if board[0][i] != "":
+                print("Except2:AddingOne to",playerTwoCount)
+                playerTwoCount += 1
                 playersAlive.append(i)
-                print("health:",board[0][i])
-                print(i,playerCards[0][i].get_health(),playerCards[0][i].get_name())
+                print("health2:",board[1][i])
+                print(2,i,playerCards[1][i].get_health(),playerCards[1][i].get_name())
+    except AttributeError:
+        print(AttributeError)
 
-    print("FinalPlayerCount:",playerOneCountTT)
+    print("FinalPlayerCount:",playerOneCount)
     # for i in range(5):
     #     if board[i + 5] != "":
     #         playerTwoCount = playerTwoCount + 1
@@ -98,7 +109,7 @@ def updatePlayersHP(board):
     #         print(i,playerCards[1][i].get_health(),playerCards[1][i].get_name())
 
 
-    return playersAlive, playerOneCountTT, playerTwoCount
+    return playersAlive, playerOneCount, playerTwoCount
 
 
 class gameRun:
@@ -173,9 +184,9 @@ class gameRun:
 
         if playerOneCount == 0 and playerTwoCount == 0:
             serverSend("Server: It's a tie!")
+        serverSend("empty message")
 
     get = False
-    ifConnected = False
     msgSend = "Connected to server"
     msgRecv = ""
 
@@ -187,8 +198,8 @@ class gameRun:
 
         if get & counter < 1:
             print("Receiving new...")
-            msgToSend, msgRecv = serverReceive()
+            msgToSend, msgRecv, playerCards = serverReceive()
             print(msgRecv)
-            loadCombat("", (msgRecv))
+            loadCombat("", (playerCards))
             get = True
             counter+= 1

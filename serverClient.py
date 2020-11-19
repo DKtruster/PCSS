@@ -8,6 +8,7 @@ def clientServerReceive():
     s.connect(('127.0.0.1', port))
     print(s.recv(1024))
     time.sleep(1)
+
     clientServerSend()
     # s.close()
 
@@ -33,5 +34,5 @@ def serverSend(boardArray):
         print("Got information from", addr)
         output = (str(boardArray[4])+" "+str(boardArray[3])+" "+str(boardArray[2])+" "+str(boardArray[1])+" "+str(boardArray[0]))
         c.sendall(output.encode("utf-8"))
-        c.close()
+        # c.close()
         return True

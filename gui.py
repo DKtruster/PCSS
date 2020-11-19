@@ -84,25 +84,25 @@ def endRound():
         rand = random.randint(0, cardImgLen)
         shopBuy(rand)
 
-    if len(cardObjects)<6:
-        for c in range(5):
-            rand = random.randint(0, cardImgLen)
-            if (boardArray[c+5] == ""):
-                cardPlaceStrHold = "cardPlace" + str(c)
-                cardPlaceStrHold = cards.Cards()
-                cardPlaceStrHold.searchData(str(rand))
-                playerCards[c+5].configure(image=Assets.cardImg[rand])
-                playerCards[c+5].configure(
-                    text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-                boardArray[c+5] = cardPlaceStrHold.get_name()
-                if len(cardObjects) > c+5:
-                    cardObjects[c+5] = cardPlaceStrHold
-                cardObjects.append(cardPlaceStrHold)
-                print("System message: Enemy Purchased: " + str(cardPlaceStrHold.get_name()))
+    #if len(cardObjects)<6:
+    #    for c in range(5):
+    #        rand = random.randint(0, cardImgLen)
+    #        if (boardArray[c+5] == ""):
+    #            cardPlaceStrHold = "cardPlace" + str(c)
+    #            cardPlaceStrHold = cards.Cards()
+    #           cardPlaceStrHold.searchData(str(rand))
+    #            playerCards[c+5].configure(image=Assets.cardImg[rand])
+    #            playerCards[c+5].configure(
+    #                text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
+    #            boardArray[c+5] = cardPlaceStrHold.get_name()
+    #            if len(cardObjects) > c+5:
+    #                cardObjects[c+5] = cardPlaceStrHold
+    #            cardObjects.append(cardPlaceStrHold)
+    #            print("System message: Enemy Purchased: " + str(cardPlaceStrHold.get_name()))
     displayGUI.updateCards("")
 
-    serverClient.clientServerReceive()
-    # serverClient.clientServerSend()
+    # serverClient.clientServerReceive()
+    serverClient.clientServerSend()
     serverClient.serverSend(boardArray)
 
 def cardSelect(PlayerSelect, cardNumber):
@@ -141,10 +141,11 @@ class displayGUI():
         window.mainloop()
 
     def updateCards(self):
-        for i in range(10):
+        print("LengthPlayerCards",len(cardObjects))
+        for i in range(len(cardObjects)): # PREV 10
             if int(cardObjects[i].get_health())<1:
                 boardArray[i]=""
-
+            print("UpdateCards",i)
             if boardArray[i] != "":
                 playerCards[i].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(cardObjects[i].get_health()))
             if boardArray[i] == "":
