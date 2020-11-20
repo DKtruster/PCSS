@@ -2,12 +2,17 @@ import socket
 import threading
 import time
 
+output=[""]
+
 def clientServerReceive():
     s = socket.socket()
     port = 20000
     s.connect(('127.0.0.1', port))
-    print(s.recv(1024))
+    # WHILE TRUE?
+    messageRecv = s.recv(1024)
+    # print(messageRecv)
     time.sleep(1)
+    output[0] = messageRecv
 
     clientServerSend()
     # s.close()
@@ -15,6 +20,8 @@ def clientServerReceive():
 def clientServerSend():
     threadSend = threading.Thread(target=clientServerReceive)
     threadSend.start()
+    print("Result outside of function",output[0])
+    return output[0]
 
 def serverSend(boardArray):
     # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen

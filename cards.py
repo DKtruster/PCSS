@@ -1,31 +1,8 @@
 import numpy as np
+import bubblesort
+import binarysearch
 
 dataLoader = np.genfromtxt('origins.txt', dtype='str')
-
-# TO-DO: Implement graphics for more cards
-
-
-def sortCards(Log):
-    dataSortHold = []
-    if Log:
-        print("Unsorted data: ")
-        for i in range (len(dataLoader)):
-            print(dataLoader[i])
-
-    # Next 6 lines are made with help from: https://www.geeksforgeeks.org/bubble-sort/
-    for lines in range(len(dataLoader)):
-        for i in range(0, len(dataLoader)-lines-1):
-            if int(dataLoader[i][0])>int(dataLoader[i+1][0]):
-                dataSortHold = dataLoader[i].copy()
-                dataLoader[i] = dataLoader[i+1]
-                dataLoader[i + 1] = dataSortHold
-
-    if Log:
-        print("Sorted data: ")
-        for i in range (len(dataLoader)):
-            print(dataLoader[i])
-        print("Sorted "+str(len(dataLoader))+" lines of data")
-    return True
 
 
 class Cards:
@@ -39,38 +16,18 @@ class Cards:
 
     # TO-DO: Add binary search
     def searchData(self, cardNumber):
-        sortCards(False)
-        middleLen = round(len(dataLoader) / 2)-1
-        middleNum = dataLoader[middleLen][0]
-        # print("Searching for:",cardNumber,"middle num:",middleNum)
-        if int(cardNumber) < int(middleNum):
-            # print("Smaller than middleNum")
-            for i in range (0,middleLen):
-                # print("Checking dataSet:", dataLoader[i][0], cardNumber)
-                if int(dataLoader[i][0]) == int(cardNumber):
-                    # print("Defining card type...")
-                    self.__cardnumber = dataLoader[i][0]
-                    self.__price = dataLoader[i][1]
-                    self.__name = dataLoader[i][2]
-                    self.__origin = dataLoader[i][3]
-                    self.__health = dataLoader[i][5]
-                    self.__damage = dataLoader[i][4]
-                    # print("Found:",cardNumber,"in lower array stack")
-                    return
-        elif int(cardNumber) >= int(middleNum):
-            # print("Greater than middleNum")
-            for i in range (int(middleNum),len(dataLoader)):
-                if int(dataLoader[i][0])==int(cardNumber):
-                    # print("Defining card type...")
-                    self.__cardnumber = dataLoader[i][0]
-                    self.__price = dataLoader[i][1]
-                    self.__name = dataLoader[i][2]
-                    self.__origin = dataLoader[i][3]
-                    self.__health = dataLoader[i][5]
-                    self.__damage = dataLoader[i][4]
-                    # print("Found: "+cardNumber + " in upper array stack")
-                    return
+        sortedCards = bubblesort.sortCards(dataLoader, False)
+        arrayPosCard = binarysearch.binarysearch(sortedCards, cardNumber)
 
+        # 404 is a default value, if it returns this number it means it haven't found anything
+        if arrayPosCard != 404:
+            print("Defining cardNumber:",cardNumber)
+            self.__cardnumber = sortedCards[arrayPosCard][0]
+            self.__price = sortedCards[arrayPosCard][1]
+            self.__name = sortedCards[arrayPosCard][2]
+            self.__origin = sortedCards[arrayPosCard][3]
+            self.__health = sortedCards[arrayPosCard][5]
+            self.__damage = sortedCards[arrayPosCard][4]
 
 
     def get_name(self):

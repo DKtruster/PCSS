@@ -9,4 +9,3 @@
 4 1 Cao_Cao Chinese 2 35
 1 1 Caesar Roman 4 20
 10 1 Brutus Roman 5 15
-11 1 strHold strHold 0 0

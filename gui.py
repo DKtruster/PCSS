@@ -102,7 +102,8 @@ def endRound():
     displayGUI.updateCards("")
 
     # serverClient.clientServerReceive()
-    serverClient.clientServerSend()
+    resultMain = serverClient.clientServerSend()
+    print("Result from main file:",resultMain)
     serverClient.serverSend(boardArray)
 
 def cardSelect(PlayerSelect, cardNumber):
