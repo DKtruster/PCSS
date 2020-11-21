@@ -30,6 +30,7 @@ def serverSend(message):
         return True
 
 def serverReceive():
+    # Next 9 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
     s = socket.socket()
     port = 20001
     print("PORT CREATED SERVER_RECEIVING")
@@ -39,7 +40,6 @@ def serverReceive():
     msg = msg.decode()
     splitMsg = msg.split(' ')
     print (splitMsg)
-    # s.close()
 
     nameOutputHold = []
 
@@ -125,8 +125,10 @@ class gameRun:
                                 if i == 0:
                                     print("\nYOUR TURN")
 
-                                attackCardHP, attackCardDMG = int(playerCards[0][playersAlive[0][i-1]].get_health()), int(playerCards[0][playersAlive[0][i-1]].get_damage())
-                                defendCardHP, defendCardDMG = int(playerCards[1][playersAlive[1][rand]].get_health()), int(playerCards[1][playersAlive[1][rand]].get_damage())
+                                try: attackCardHP, attackCardDMG = int(playerCards[0][playersAlive[0][i-1]].get_health()), int(playerCards[0][playersAlive[0][i-1]].get_damage())
+                                except IndexError: print("Out of bounds")
+                                try: defendCardHP, defendCardDMG = int(playerCards[1][playersAlive[1][rand]].get_health()), int(playerCards[1][playersAlive[1][rand]].get_damage())
+                                except IndexError: print("Out of bounds")
                                 combatInfo = ("combat "+"Player0 card: "+str(i)+" attacks "+str(rand))
                                 print(combatInfo)
                                 serverSend(combatInfo)
@@ -140,8 +142,10 @@ class gameRun:
                                     serverSend("[YOU] "+str(playerCards[0][playersAlive[x][i-1]].get_name()) + " dies in an attempt to kill " + playerCards[1][rand].get_name())
                                     print(msgSend)
 
-                                playerCards[0][playersAlive[0][i-1]].losehp(defendCardDMG)
-                                playerCards[1][playersAlive[1][rand]].losehp(attackCardDMG)
+                                try: playerCards[0][playersAlive[0][i-1]].losehp(defendCardDMG)
+                                except IndexError: print("Out of bounds")
+                                try: playerCards[1][playersAlive[1][rand]].losehp(attackCardDMG)
+                                except IndexError: print("Out of bounds")
 
                     playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
                     if x == 1 and playerOneCount > 0 and playerTwoCount > 0:
@@ -152,8 +156,10 @@ class gameRun:
                                     print("\nENEMY TURN")
                                 playersAlive, _, _ = updatePlayersHP(boardArrayInput)
 
-                                attackCardHP, attackCardDMG = int(playerCards[1][playersAlive[1][i-1]].get_health()), int(playerCards[1][playersAlive[1][i-1]].get_damage())
-                                defendCardHP, defendCardDMG = int(playerCards[0][playersAlive[0][rand]].get_health()), int(playerCards[0][playersAlive[0][rand]].get_damage())
+                                try:attackCardHP, attackCardDMG = int(playerCards[1][playersAlive[1][i-1]].get_health()), int(playerCards[1][playersAlive[1][i-1]].get_damage())
+                                except IndexError: print("Out of bounds")
+                                try: defendCardHP, defendCardDMG = int(playerCards[0][playersAlive[0][rand]].get_health()), int(playerCards[0][playersAlive[0][rand]].get_damage())
+                                except IndexError: print("Out of bounds")
 
                                 combatInfo = ("combat "+"Player1 card: "+str(i)+" attacks "+str(rand))
                                 print(combatInfo)
@@ -164,9 +170,10 @@ class gameRun:
                                 if attackCardHP < defendCardDMG:
                                     serverSend("[Enemy] " +str(playerCards[1][playersAlive[x][i-1]].get_name()) + " dies in an attempt to kill " + playerCards[0][rand].get_name())
 
-                                playerCards[1][playersAlive[1][i-1]].losehp(defendCardDMG)
-                                playerCards[0][playersAlive[0][rand]].losehp(attackCardDMG)
-                        # serverSend(msgSend)
+                                try: playerCards[1][playersAlive[1][i-1]].losehp(defendCardDMG)
+                                except IndexError: print("Out of bounds")
+                                try:playerCards[0][playersAlive[0][rand]].losehp(attackCardDMG)
+                                except IndexError: print("Out of bounds")
 
             playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(playerCards)
             if playerOneCount > 0 and playerTwoCount == 0:

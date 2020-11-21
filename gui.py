@@ -39,6 +39,7 @@ runCheck = False
 queueEvents = []
 
 def clientServerReceive():
+    # Next 7 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
     s = socket.socket()
     port = 20000
     s.connect(('127.0.0.1', port))
@@ -77,6 +78,7 @@ def clientServerReceive():
         s.close()
 
     if messageRecv != "Close":
+        print(messageRecv)
         print("queueEvents",queueEvents)
         clientServerReceiveStart()
 
