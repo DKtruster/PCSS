@@ -114,6 +114,10 @@ def moveCard():
                 defaultCardX = -720-((int(queueEvents[0][3]) - 5) * 120)
                 playerCards[int(queueEvents[0][3])].place(y = 350-(i*8), x=defaultCardX+(i*perMove))
                 time.sleep(0.02)
+                if i == 10:
+                    cardObjects[int(queueEvents[0][3])].losehp(cardObjects[int(queueEvents[0][5])+5].get_damage())
+                    cardObjects[int(queueEvents[0][5])+5].losehp(cardObjects[int(queueEvents[0][3])].get_damage())
+                    displayGUI.updateCards(self="")
 
             for i in range (11):
                 playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
@@ -123,16 +127,24 @@ def moveCard():
             queueEvents.pop(0)
             return
 
-        elif queueEvents[0][1]=="Player1":
+        if queueEvents[0][1]=="Player1":
             for i in range (11):
-                playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8))
-                time.sleep(0.0001)
+                lengthAD = int(queueEvents[0][3]) - int(queueEvents[0][5])
+                perMove = (lengthAD * 120) / 11
+                print("lengthAD", lengthAD, "perMove", perMove)
+                defaultCardX = 480 - ((int(queueEvents[0][3])+5) * 120)
+                playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8), x=defaultCardX+(i*perMove))
+                time.sleep(0.02)
+                if i == 10:
+                    cardObjects[int(queueEvents[0][3])+5].losehp(cardObjects[int(queueEvents[0][5])].get_damage())
+                    cardObjects[int(queueEvents[0][5])].losehp(cardObjects[int(queueEvents[0][3])+5].get_damage())
+                    displayGUI.updateCards(self="")
             for i in range (11):
-                playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8))
+                playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
                 time.sleep(0.0001)
+                if i == 10:
+                    playerCards[int(queueEvents[0][3])+5].place(y=100, x=defaultCardX)
             queueEvents.pop(0)
-            return
-
 
 
 def shopBuy(shopNumber):
@@ -167,30 +179,15 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
-    threadSend = threading.Thread(target=moveCard)
-    threadSend.start()
+    if len(cardObjects)<8:
+        threadSend = threading.Thread(target=moveCard)
+        threadSend.start()
 
-
-    #if len(cardObjects)<6:
-    #    for c in range(5):
-    #        rand = random.randint(0, cardImgLen)
-    #        if (boardArray[c+5] == ""):
-    #            cardPlaceStrHold = "cardPlace" + str(c)
-    #            cardPlaceStrHold = cards.Cards()
-    #           cardPlaceStrHold.searchData(str(rand))
-    #            playerCards[c+5].configure(image=Assets.cardImg[rand])
-    #            playerCards[c+5].configure(
-    #                text="\n\n\n\n\n\n\n\n\n\n\n" + cardPlaceStrHold.get_damage() + "                " + cardPlaceStrHold.get_health())
-    #            boardArray[c+5] = cardPlaceStrHold.get_name()
-    #            if len(cardObjects) > c+5:
-    #                cardObjects[c+5] = cardPlaceStrHold
-    #            cardObjects.append(cardPlaceStrHold)
-    #            print("System message: Enemy Purchased: " + str(cardPlaceStrHold.get_name()))
-    displayGUI.updateCards("")
-
-    # serverClient.clientServerReceive()
-    clientServerReceiveStart()
-    serverSend(boardArray)
+        displayGUI.updateCards("")
+        clientServerReceiveStart()
+        serverSend(boardArray)
+    elif len(cardObjects)>8:
+        print("Game ended")
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:

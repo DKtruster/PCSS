@@ -43,4 +43,4 @@ class Cards:
         return self.__origin
 
     def losehp(self, losthp):
-        self.__health = int(self.__health)-losthp
+        self.__health = int(self.__health)-int(losthp)
