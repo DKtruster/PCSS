@@ -21,7 +21,7 @@ class Cards:
 
         # 404 is a default value, if it returns this number it means it haven't found anything
         if arrayPosCard != 404:
-            print("Defining cardNumber:",cardNumber)
+            # print("Defining cardNumber:",cardNumber)
             self.__cardnumber = sortedCards[arrayPosCard][0]
             self.__price = sortedCards[arrayPosCard][1]
             self.__name = sortedCards[arrayPosCard][2]

@@ -47,20 +47,18 @@ def clientServerReceive():
     messageRecv = messageRecv.decode()
     splitMsg = messageRecv.split(' ')
     time.sleep(0.0001)
-    # queueEvents.append(messageRecv)
+    print("[SERVER]:",messageRecv)
 
     if splitMsg[0] == "combat":
         queueEvents.append(splitMsg)
         moveCard()
 
     if splitMsg[0] == "EnemyBoard":
-        print("Got Enemy Board!")
+        print("[SYSTEM]: Received enemy board from server")
         for c in range(5,10):
             if (boardArray[c] == ""):
-                print("C4",splitMsg[c-4])
                 cardPlaceStrHold = "cardPlace" + str(c)
                 cardPlaceStrHold = cards.Cards()
-                print("Searching data for:", splitMsg[c-4])
                 cardPlaceStrHold.searchData(str(splitMsg[c-4]))
                 playerCards[c].configure(image=Assets.cardImg[int(splitMsg[c-4])])
                 playerCards[c].configure(
@@ -70,16 +68,12 @@ def clientServerReceive():
                 if len(cardObjects) > c:
                     cardObjects[c] = cardPlaceStrHold
                 cardObjects.append(cardPlaceStrHold)
-                print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
 
     if messageRecv == "Close":
-        print("Got it!",messageRecv)
-        print("Closing serverReceive...")
+        print("System message: Closing serverReceive()...")
         s.close()
 
     if messageRecv != "Close":
-        print(messageRecv)
-        print("queueEvents",queueEvents)
         clientServerReceiveStart()
 
 def clientServerReceiveStart():
@@ -107,12 +101,10 @@ def serverSend(boardArray):
 
 def moveCard():
     while len(queueEvents) > 0:
-        print("WHILE LOOPING", queueEvents[0])
         if queueEvents[0][1]=="Player0":
             for i in range (11):
                 lengthAD = int(queueEvents[0][3])-int(queueEvents[0][5])
                 perMove = (lengthAD*120)/11
-                print("lengthAD",lengthAD,"perMove",perMove)
                 defaultCardX = -720-((int(queueEvents[0][3]) - 5) * 120)
                 playerCards[int(queueEvents[0][3])].place(y = 350-(i*8), x=defaultCardX+(i*perMove))
                 time.sleep(0.02)
@@ -125,7 +117,7 @@ def moveCard():
                 playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
                 if i == 10:
                     playerCards[int(queueEvents[0][3])].place(y=350, x=defaultCardX)
-                time.sleep(0.02)
+                time.sleep(0.01)
             queueEvents.pop(0)
             return
 
@@ -133,7 +125,6 @@ def moveCard():
             for i in range (11):
                 lengthAD = int(queueEvents[0][3]) - int(queueEvents[0][5])
                 perMove = (lengthAD * 120) / 11
-                print("lengthAD", lengthAD, "perMove", perMove)
                 defaultCardX = 480 - ((int(queueEvents[0][3])+5) * 120)
                 playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8), x=defaultCardX+(i*perMove))
                 time.sleep(0.02)
@@ -143,7 +134,7 @@ def moveCard():
                     displayGUI.updateCards(self="")
             for i in range (11):
                 playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
-                time.sleep(0.0001)
+                time.sleep(0.01)
                 if i == 10:
                     playerCards[int(queueEvents[0][3])+5].place(y=100, x=defaultCardX)
             queueEvents.pop(0)
@@ -157,7 +148,6 @@ def shopBuy(shopNumber):
                     if (boardArray[c] == ""):
                         cardPlaceStrHold = "cardPlace" + str(c)
                         cardPlaceStrHold = cards.Cards()
-                        print("Searching data for:",i)
                         cardPlaceStrHold.searchData(str(i))
                         playerCards[c].configure(image=Assets.cardImg[i])
                         playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(cardPlaceStrHold.get_health()))
@@ -165,10 +155,7 @@ def shopBuy(shopNumber):
                         if len(cardObjects) > c:
                             cardObjects[c] = cardPlaceStrHold
                         cardObjects.append(cardPlaceStrHold)
-                        print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
                         return
-            if i == 2:
-                print("System message: No more capacity")
 
 
 def shopRandom():
@@ -181,7 +168,9 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
-    if len(cardObjects)<8:
+    if len(cardObjects)<5:
+        print("System message: Select 5 cards to begin the game...")
+    if len(cardObjects)==5:
         threadSend = threading.Thread(target=moveCard)
         threadSend.start()
 
@@ -189,19 +178,16 @@ def endRound():
         clientServerReceiveStart()
         serverSend(boardArray)
     elif len(cardObjects)>8:
-        print("Game ended")
+        print("System message: Game ended")
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:
         boardArray[cardNumber] = ""
         playerCards[cardNumber].configure(image=CDunknownPT, text="")
         displayGUI.updateCards(self="")
+        try: cardObjects.pop(cardNumber-1)
+        except IndexError: print("System message: No active cards to delete")
 
-        print("Card: " + str(cardNumber) + " Player: " + str(PlayerSelect))
-        print(boardArray[0] + " " + boardArray[1] + " " + boardArray[2] + " " + boardArray[3] + " " +
-              boardArray[4])
-        print(boardArray[5] + " " + boardArray[6] + " " + boardArray[7] + " " + boardArray[8] + " " +
-              boardArray[9])
     if len(cardObjects) > 5:
         print("System message: Can't make any board changes while the game is running")
 
@@ -227,11 +213,9 @@ class displayGUI():
         window.mainloop()
 
     def updateCards(self):
-        print("LengthPlayerCards",len(cardObjects))
         for i in range(len(cardObjects)): # PREV 10
             if int(cardObjects[i].get_health())<1:
                 boardArray[i]=""
-            print("UpdateCards",i)
             if boardArray[i] != "":
                 playerCards[i].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardObjects[i].get_damage()) + "                " + str(cardObjects[i].get_health()))
             if boardArray[i] == "":

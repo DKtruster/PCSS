@@ -39,7 +39,7 @@ def serverReceive():
     msg = s.recv(1024)
     msg = msg.decode()
     splitMsg = msg.split(' ')
-    print (splitMsg)
+    print ("[CLIENT]:",splitMsg)
 
     nameOutputHold = []
 
@@ -55,14 +55,11 @@ def serverReceive():
         strHold = cards.Cards()
         typeHold = random.randint(0,10)
         strHold.searchData(typeHold)
-        # nameOutputHold.append(str(strHold.get_name()))
         playerCards[1].append(strHold)
         boardArray.append(typeHold)
 
-    testSend = ("EnemyBoard "+str(boardArray[5])+" "+str(boardArray[6])+" "+str(boardArray[7])+" "+str(boardArray[8])+" "+str(boardArray[9]))
-    serverSend(testSend)
-
-    # TO-DO: Lav kortene til objekter her, så de kan passes ind i spillet
+    sendEnemyBoardInfo = ("EnemyBoard "+str(boardArray[5])+" "+str(boardArray[6])+" "+str(boardArray[7])+" "+str(boardArray[8])+" "+str(boardArray[9]))
+    serverSend(sendEnemyBoardInfo)
 
     print("PlayerObjects:",playerCards)
 
@@ -73,9 +70,6 @@ def updatePlayersHP(board):
     playerOneCount = 0
     playerTwoCount = 0
     playersAlive = [[],[]]
-
-    # print("Player HP List:",playerCards.get_health())
-    print("BoardUpdateHP",board)
 
     try:
         for i in range(5):
@@ -89,9 +83,6 @@ def updatePlayersHP(board):
     except AttributeError:
         print(AttributeError)
 
-    print("FinalPlayerOneCount:",playerOneCount, "FinalPlayerTwoCount",playerTwoCount)
-
-
     return playersAlive, playerOneCount-1, playerTwoCount-1
 
 
@@ -102,7 +93,6 @@ class gameRun:
         playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
         while len(playersAlive[0]) > 0 and len(playersAlive[1]) > 0:
             roundCount += 1
-            print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
 
             # Only starts the combat if one of the two players have a card on the deck
             if playerOneCount > 0 and playerTwoCount>0:
@@ -110,16 +100,14 @@ class gameRun:
                 print("PlayerOne has: "+str(playerOneCount)+ " cards \n PlayerTwo has: "+str(playerTwoCount)+" cards")
                 print("PlayerOne:",boardArray[0], boardArray[1], boardArray[2], boardArray[3], boardArray[4])
                 print("PlayerTwo:",boardArray[5], boardArray[6], boardArray[7], boardArray[8], boardArray[9],"\n")
-
                 print("Preparing combat...")
 
                 for x in range(2):
-                    print("X =",x,"lengthAlive",len(playersAlive[x]))
 
                     playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
                     if x == 0 and playerOneCount > 0 and playerTwoCount > 0:
                         for i in range(playerOneCount):
-                            msgSend = "test"
+                            msgSend = ""
                             if len(playersAlive[1])>0:
                                 rand = int(random.randint(0, playerTwoCount-1))
                                 if i == 0:
