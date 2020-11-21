@@ -4,9 +4,10 @@ from PIL import Image, ImageTk
 import random
 import cards
 import Assets
-import serverClient
-import time
 import threading
+import time
+import socket
+
 
 # WINDOW SETUP
 window = tk.Tk()
@@ -35,17 +36,106 @@ CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
+queueEvents = []
+
+def clientServerReceive():
+    s = socket.socket()
+    port = 20000
+    s.connect(('127.0.0.1', port))
+    messageRecv = s.recv(1024)
+    messageRecv = messageRecv.decode()
+    splitMsg = messageRecv.split(' ')
+    time.sleep(0.0001)
+    # queueEvents.append(messageRecv)
+
+    if splitMsg[0] == "combat":
+        queueEvents.append(splitMsg)
+        moveCard()
+
+    if splitMsg[0] == "EnemyBoard":
+        print("Got Enemy Board!")
+        for c in range(5,10):
+            if (boardArray[c] == ""):
+                print("C4",splitMsg[c-4])
+                cardPlaceStrHold = "cardPlace" + str(c)
+                cardPlaceStrHold = cards.Cards()
+                print("Searching data for:", splitMsg[c-4])
+                cardPlaceStrHold.searchData(str(splitMsg[c-4]))
+                playerCards[c].configure(image=Assets.cardImg[int(splitMsg[c-4])])
+                playerCards[c].configure(
+                    text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(
+                        cardPlaceStrHold.get_health()))
+                boardArray[c] = splitMsg[c-4]
+                if len(cardObjects) > c:
+                    cardObjects[c] = cardPlaceStrHold
+                cardObjects.append(cardPlaceStrHold)
+                print("System message: Purchased: " + str(cardPlaceStrHold.get_name()))
+
+    if messageRecv == "Close":
+        print("Got it!",messageRecv)
+        print("Closing serverReceive...")
+        s.close()
+
+    if messageRecv != "Close":
+        print("queueEvents",queueEvents)
+        clientServerReceiveStart()
+
+def clientServerReceiveStart():
+    threadSend = threading.Thread(target=clientServerReceive)
+    threadSend.start()
+    if len(queueEvents)>0:
+        print("Server:", queueEvents[len(queueEvents)-1])
+
+def serverSend(boardArray):
+    # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen
+    s = socket.socket()
+    port = 20001
+    print("PORT CREATED SERVER_SENDING")
+    s.bind(('', port))
+    print("Socket binded to %s" % (port))
+    s.listen(5)
+    print("SOCKET LISTENING")
+
+    while True:
+        c, addr = s.accept()
+        print("Got information from", addr)
+        output = (str(boardArray[4])+" "+str(boardArray[3])+" "+str(boardArray[2])+" "+str(boardArray[1])+" "+str(boardArray[0]))
+        c.sendall(output.encode("utf-8"))
+        return True
 
 def moveCard():
-    for i in range (11):
-        playerCards[0].place(y = 350-(i*8))
-        time.sleep(0.0001)
-    for i in range (11):
-        playerCards[0].place(y = 270+(i*8))
-        time.sleep(0.0001)
+    while len(queueEvents) > 0:
+        print("WHILE LOOPING", queueEvents[0])
+        if queueEvents[0][1]=="Player0":
+            for i in range (11):
+                lengthAD = int(queueEvents[0][3])-int(queueEvents[0][5])
+                perMove = (lengthAD*120)/11
+                print("lengthAD",lengthAD,"perMove",perMove)
+                defaultCardX = -720-((int(queueEvents[0][3]) - 5) * 120)
+                playerCards[int(queueEvents[0][3])].place(y = 350-(i*8), x=defaultCardX+(i*perMove))
+                time.sleep(0.02)
+
+            for i in range (11):
+                playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
+                if i == 10:
+                    playerCards[int(queueEvents[0][3])].place(y=350, x=defaultCardX)
+                time.sleep(0.02)
+            queueEvents.pop(0)
+            return
+
+        elif queueEvents[0][1]=="Player1":
+            for i in range (11):
+                playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8))
+                time.sleep(0.0001)
+            for i in range (11):
+                playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8))
+                time.sleep(0.0001)
+            queueEvents.pop(0)
+            return
+
+
 
 def shopBuy(shopNumber):
-    cardPlaceStrHold = ""
     if len(cardObjects) < 5:
         for i in range(cardImgLen+1):
             if shopArray[shopNumber] == i:
@@ -58,7 +148,6 @@ def shopBuy(shopNumber):
                         playerCards[c].configure(image=Assets.cardImg[i])
                         playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(cardPlaceStrHold.get_health()))
                         boardArray[c] = i
-                        # boardArray[c] = cardPlaceStrHold.get_name()
                         if len(cardObjects) > c:
                             cardObjects[c] = cardPlaceStrHold
                         cardObjects.append(cardPlaceStrHold)
@@ -80,9 +169,7 @@ def shopRandom():
 def endRound():
     threadSend = threading.Thread(target=moveCard)
     threadSend.start()
-    while len(cardObjects)<5:
-        rand = random.randint(0, cardImgLen)
-        shopBuy(rand)
+
 
     #if len(cardObjects)<6:
     #    for c in range(5):
@@ -102,9 +189,8 @@ def endRound():
     displayGUI.updateCards("")
 
     # serverClient.clientServerReceive()
-    resultMain = serverClient.clientServerSend()
-    print("Result from main file:",resultMain)
-    serverClient.serverSend(boardArray)
+    clientServerReceiveStart()
+    serverSend(boardArray)
 
 def cardSelect(PlayerSelect, cardNumber):
     if len(cardObjects) < 6:
