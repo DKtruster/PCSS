@@ -3,6 +3,7 @@ import threading
 import time
 
 output=[""]
+checkGameStatus = [1]
 
 def clientServerReceive():
     s = socket.socket()
@@ -10,17 +11,23 @@ def clientServerReceive():
     s.connect(('127.0.0.1', port))
     # WHILE TRUE?
     messageRecv = s.recv(1024)
+    messageRecv = messageRecv.decode()
     # print(messageRecv)
-    time.sleep(1)
+    time.sleep(0.0001)
     output[0] = messageRecv
 
-    clientServerSend()
+    if messageRecv == "Close":
+        print("Got it!",messageRecv)
+        print("Closing serverReceive...")
+
+    if messageRecv != "Close":
+        clientServerSend()
     # s.close()
 
 def clientServerSend():
     threadSend = threading.Thread(target=clientServerReceive)
     threadSend.start()
-    print("Result outside of function",output[0])
+    print("Server:",output[0])
     return output[0]
 
 def serverSend(boardArray):

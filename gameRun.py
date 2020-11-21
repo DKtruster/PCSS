@@ -27,7 +27,6 @@ def serverSend(message):
         print("Got information from", addr)
         output = message
         c.sendall(output.encode("utf-8"))
-        # c.close()
         return True
 
 def serverReceive():
@@ -80,27 +79,17 @@ def updatePlayersHP(board):
 
     try:
         for i in range(5):
-            print("HPTEST1",board[0][i].get_health())
-            # if board[0][i] != "":
             if int(board[0][i].get_health()) > 0:
-                print("Except2:AddingOne to",playerOneCount)
                 playerOneCount += 1
-                playersAlive.append(i)
-                print("health1:",board[0][i])
-                print(1,i,playerCards[0][i].get_health(),playerCards[0][i].get_name())
+                playersAlive[0].append(i)
         for i in range(5):
-            print("HPTEST2",board[1][i].get_health())
             if int(board[1][i].get_health()) > 0:
-            # if board[0][i] != "":
-                print("Except2:AddingOne to",playerTwoCount)
                 playerTwoCount += 1
-                playersAlive.append(i)
-                print("health2:",board[1][i])
-                print(2,i,playerCards[1][i].get_health(),playerCards[1][i].get_name())
+                playersAlive[1].append(i)
     except AttributeError:
         print(AttributeError)
 
-    print("FinalPlayerCount:",playerOneCount)
+    print("FinalPlayerOneCount:",playerOneCount, "FinalPlayerTwoCount",playerTwoCount)
     # for i in range(5):
     #     if board[i + 5] != "":
     #         playerTwoCount = playerTwoCount + 1
@@ -109,82 +98,93 @@ def updatePlayersHP(board):
     #         print(i,playerCards[1][i].get_health(),playerCards[1][i].get_name())
 
 
-    return playersAlive, playerOneCount, playerTwoCount
+    return playersAlive, playerOneCount-1, playerTwoCount-1
 
 
 class gameRun:
     def loadCombat(self, boardArrayInput):
+        roundCount = 0
+
         playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
-        print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
+        while len(playersAlive[0]) > 0 and len(playersAlive[1]) > 0:
+            roundCount += 1
+            print("PlayeOneCount: "+str(playerOneCount), " PlayerTwoCount: "+str(playerTwoCount))
 
-        # Only starts the combat if one of the two players have a card on the deck
-        if playerOneCount > 0 and playerTwoCount>0:
-            print("Loading board...")
-            print("PlayerOne has: "+str(playerOneCount)+ " cards \n PlayerTwo has: "+str(playerTwoCount)+" cards")
-            print("PlayerOne:",boardArray[0], boardArray[1], boardArray[2], boardArray[3], boardArray[4])
-            print("PlayerTwo:",boardArray[5], boardArray[6], boardArray[7], boardArray[8], boardArray[9],"\n")
+            # Only starts the combat if one of the two players have a card on the deck
+            if playerOneCount > 0 and playerTwoCount>0:
+                print("Loading board...")
+                print("PlayerOne has: "+str(playerOneCount)+ " cards \n PlayerTwo has: "+str(playerTwoCount)+" cards")
+                print("PlayerOne:",boardArray[0], boardArray[1], boardArray[2], boardArray[3], boardArray[4])
+                print("PlayerTwo:",boardArray[5], boardArray[6], boardArray[7], boardArray[8], boardArray[9],"\n")
 
-            print("Preparing combat...")
+                print("Preparing combat...")
 
-            for x in range(2):
-                playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
-                for i in range (len(playersAlive[x])):
+                for x in range(2):
+                    print("X =",x,"lengthAlive",len(playersAlive[x]))
+
                     playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
-                    print("PlayersAlive:",playersAlive)
-                    if x == 0:
-                        msgSend = "test"
-                        if len(playersAlive[1])>0:
-                            rand = int(random.randint(0, (len(playersAlive[1]))-1))
-                            if i == 0:
-                                print("\nYOUR TURN")
+                    if x == 0 and playerOneCount > 0 and playerTwoCount > 0:
+                        for i in range(playerOneCount):
+                            msgSend = "test"
+                            if len(playersAlive[1])>0:
+                                rand = int(random.randint(0, playerTwoCount-1))
+                                if i == 0:
+                                    print("\nYOUR TURN")
 
-                            attackCardHP, attackCardDMG = int(playerCards[0][playersAlive[0][i]].get_health()), int(playerCards[0][playersAlive[0][i]].get_damage())
-                            defendCardHP, defendCardDMG = int(playerCards[1][playersAlive[1][rand]-5].get_health()), int(playerCards[1][playersAlive[1][rand]-5].get_damage())
+                                attackCardHP, attackCardDMG = int(playerCards[0][playersAlive[0][i-1]].get_health()), int(playerCards[0][playersAlive[0][i-1]].get_damage())
+                                defendCardHP, defendCardDMG = int(playerCards[1][playersAlive[1][rand]].get_health()), int(playerCards[1][playersAlive[1][rand]].get_damage())
 
-                            print("AttackcardDMG",attackCardHP,"DefendcardHP",defendCardHP)
-                            if int(attackCardDMG) > int(defendCardHP):
-                                print("Yup")
-                                print(str(playerCards[playersAlive[x][i]].get_name()) + " kills " + playerCards[rand+5].get_name())
-                                msgSend=(str(playerCards[playersAlive[x][i]].get_name()) + " kills " + playerCards[rand+5].get_name())
-                                print(msgSend)
+                                print("AttackCard HP:",attackCardHP,"DMG:",attackCardDMG,"\nDefendCard HP:",defendCardHP,"DMG:",defendCardDMG)
+                                if int(attackCardDMG) > int(defendCardHP):
+                                    serverSend("[YOU] "+str(playerCards[0][playersAlive[x][i-1]].get_name()) + " kills " + str(playerCards[1][rand].get_name()))
+                                    print(msgSend)
 
-                            if int(attackCardHP) < int(defendCardDMG):
-                                print("Yup")
-                                print(str(playerCards[playersAlive[x][i]].get_name()) + " dies in an attempt to kill " + playerCards[rand+5].get_name())
-                                msgSend=(str(playerCards[playersAlive[x][i]].get_name()) + " dies in an attempt to kill " + playerCards[rand+5].get_name())
-                                print(msgSend)
+                                if int(attackCardHP) < int(defendCardDMG):
+                                    serverSend("[YOU] "+str(playerCards[0][playersAlive[x][i-1]].get_name()) + " dies in an attempt to kill " + playerCards[1][rand].get_name())
+                                    print(msgSend)
 
-                            playerCards[0][playersAlive[x][i]].losehp(defendCardDMG)
-                            playerCards[1][playersAlive[1][rand]-5].losehp(attackCardDMG)
+                                playerCards[0][playersAlive[0][i-1]].losehp(defendCardDMG)
+                                playerCards[1][playersAlive[1][rand]].losehp(attackCardDMG)
 
-                    if x == 1:
-                        if len(playersAlive[0])>0:
-                            rand = int(random.randint(0, (len(playersAlive[0]))-1))
-                            if i == 0:
-                                print("\nENEMY TURN")
-                            attackCardHP, attackCardDMG = int(playerCards[1][playersAlive[1][i]-5].get_health()), int(playerCards[1][playersAlive[1][i]-5].get_damage())
-                            defendCardHP, defendCardDMG = int(playerCards[0][playersAlive[0][rand]].get_health()), int(playerCards[0][playersAlive[0][rand]].get_damage())
+                    playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
+                    if x == 1 and playerOneCount > 0 and playerTwoCount > 0:
+                        for i in range(playerTwoCount):
+                            if len(playersAlive[0])>0:
+                                rand = int(random.randint(0, playerOneCount-1))
+                                if i == 0:
+                                    print("\nENEMY TURN")
+                                playersAlive, _, _ = updatePlayersHP(boardArrayInput)
 
-                            if attackCardDMG > defendCardHP:
-                                msgSend=(str(playerCards[playersAlive[x][i]].get_name()) + " kills " + playerCards[rand].get_name())
-                            if attackCardHP < defendCardDMG:
-                                msgSend=(str(playerCards[playersAlive[x][i]].get_name()) + " dies in an attempt to kill " + playerCards[rand].get_name())
+                                attackCardHP, attackCardDMG = int(playerCards[1][playersAlive[1][i-1]].get_health()), int(playerCards[1][playersAlive[1][i-1]].get_damage())
+                                defendCardHP, defendCardDMG = int(playerCards[0][playersAlive[0][rand]].get_health()), int(playerCards[0][playersAlive[0][rand]].get_damage())
 
-                            playerCards[1][playersAlive[1][i]-5].losehp(defendCardDMG)
-                            playerCards[0][playersAlive[0][rand]].losehp(attackCardDMG)
-                    serverSend(msgSend)
+                                if attackCardDMG > defendCardHP:
+                                    serverSend("[Enemy] " +str(playerCards[1][playersAlive[x][i-1]].get_name()) + " kills " + playerCards[0][rand].get_name())
+                                if attackCardHP < defendCardDMG:
+                                    serverSend("[Enemy] " +str(playerCards[1][playersAlive[x][i-1]].get_name()) + " dies in an attempt to kill " + playerCards[0][rand].get_name())
 
-        playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(playerCards)
-        print("PlayerOneCount",playerOneCount,"PlayerTwoCount",playerTwoCount)
-        if playerOneCount > 0 and playerTwoCount == 0:
-            serverSend("Server: You won!")
+                                playerCards[1][playersAlive[1][i-1]].losehp(defendCardDMG)
+                                playerCards[0][playersAlive[0][rand]].losehp(attackCardDMG)
+                        # serverSend(msgSend)
 
-        if playerOneCount == 0 and playerTwoCount > 0:
-            serverSend("Server: You lost")
+            playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(playerCards)
+            if playerOneCount > 0 and playerTwoCount == 0:
+                serverSend("You won!")
+                print("Game ended")
+                serverSend("Close")
 
-        if playerOneCount == 0 and playerTwoCount == 0:
-            serverSend("Server: It's a tie!")
-        serverSend("empty message")
+            if playerOneCount == 0 and playerTwoCount > 0:
+                serverSend("You lost")
+                print("Game ended")
+                serverSend("Close")
+
+            if playerOneCount == 0 and playerTwoCount == 0:
+                serverSend("It's a tie!")
+                print("Game ended")
+                serverSend("Close")
+
+            msgTest = "round count:"+str(roundCount)
+            serverSend(msgTest)
 
     get = False
     msgSend = "Connected to server"
@@ -193,7 +193,6 @@ class gameRun:
     counter = 0
 
     while True & counter < 1:
-        # print("Sending new...")
         get = serverSend(msgSend)
 
         if get & counter < 1:
