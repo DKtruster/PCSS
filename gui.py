@@ -9,7 +9,7 @@ import time
 import socket
 
 
-# WINDOW SETUP
+# Window setup
 window = tk.Tk()
 window.title("PCSS Project - Lukas Kristensen")
 window.geometry("1200x700")
@@ -17,6 +17,7 @@ window.resizable(False, False)
 
 cardObjects, playerCards, shopCards, boardArray, shopArray = [], [], [], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", ""]
 
+# Loads the assets into the program with the ImageTkinter image format
 for x in range(len(Assets.cardImg)):
     Assets.cardImg[x] = ImageTk.PhotoImage(Assets.cardImg[x])
 
@@ -25,7 +26,7 @@ for x in range(len(Assets.shopImg)):
 
 cardImgLen = len(Assets.cardImg)-1
 
-# LOADING IMAGES
+# Loading non categorised assets into the program
 bgPT = ImageTk.PhotoImage(Assets.bg1)
 backgroundL = Label(image=bgPT)
 
@@ -36,6 +37,7 @@ CDunknown = Image.open("Assets/unknown1low.jpg")
 CDunknownPT = ImageTk.PhotoImage(CDunknown)
 
 runCheck = False
+# Array of events from the combat, which is being animated for the user in the moveCard() function
 queueEvents = []
 
 def clientServerReceive():
@@ -60,9 +62,7 @@ def clientServerReceive():
                 cardPlaceStrHold = cards.Cards()
                 cardPlaceStrHold.searchData(str(splitMsg[c-4]))
                 playerCards[c].configure(image=Assets.cardImg[int(splitMsg[c-4])])
-                playerCards[c].configure(
-                    text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(
-                        cardPlaceStrHold.get_health()))
+                playerCards[c].configure(text="\n\n\n\n\n\n\n\n\n\n\n" + str(cardPlaceStrHold.get_damage()) + "                " + str(cardPlaceStrHold.get_health()))
                 boardArray[c] = splitMsg[c-4]
                 if len(cardObjects) > c:
                     cardObjects[c] = cardPlaceStrHold
@@ -76,6 +76,7 @@ def clientServerReceive():
         clientServerReceiveStart()
 
 def clientServerReceiveStart():
+    # Function for threading the clientServerReceive function
     threadSend = threading.Thread(target=clientServerReceive)
     threadSend.start()
     if len(queueEvents)>0:
@@ -99,6 +100,7 @@ def serverSend(boardArray):
         return True
 
 def moveCard():
+    # Simulates the game in the GUI, by animating the game events received from the server
     animationSpeed = 0.04
     framesPerAnimation = 11
     while len(queueEvents) > 0:
@@ -142,11 +144,15 @@ def moveCard():
 
 
 def shopBuy(shopNumber):
+    # Updates the server board depending on the shop number the player bought
     if len(cardObjects) < 5:
         for i in range(cardImgLen+1):
+            # Checks if the shopNumber is equal to a number from the data base to identify the shop number
             if shopArray[shopNumber] == i:
                 for c in range(5):
+                    # Checks if the space is empty
                     if (boardArray[c] == ""):
+                        # Loads data into the game board
                         cardPlaceStrHold = cards.Cards()
                         cardPlaceStrHold.searchData(str(i))
                         playerCards[c].configure(image=Assets.cardImg[i])
@@ -159,6 +165,7 @@ def shopBuy(shopNumber):
 
 
 def shopRandom():
+    # Randomizes shop cards
     for i in range(5):
         rand = random.randint(0, cardImgLen)
         shopCards[i].configure(image=Assets.shopImg[rand])
@@ -168,8 +175,10 @@ def shopRandom():
         displayGUI(True)
 
 def endRound():
+    # When the player presses the "end round" button the game begins
     if len(cardObjects)<5:
         print("System message: Select 5 cards to begin the game...")
+    # Starts a new thread to animating the game
     if len(cardObjects)==5:
         threadSend = threading.Thread(target=moveCard)
         threadSend.start()
@@ -180,7 +189,8 @@ def endRound():
     elif len(cardObjects)>8:
         print("System message: Game ended")
 
-def cardSelect(PlayerSelect, cardNumber):
+def cardSelect(cardNumber):
+    # If the player presses on a card it is removed from the game
     if len(cardObjects) < 6:
         boardArray[cardNumber] = ""
         playerCards[cardNumber].configure(image=CDunknownPT, text="")
@@ -196,24 +206,27 @@ def cardSelect(PlayerSelect, cardNumber):
 class displayGUI():
     # GUI Set-up made with help from: https://www.geeksforgeeks.org/python-gui-tkinter/
     def __init__(self, runcheck: bool):
-
+        # Places the player cards
         for i in range(10):
             if i < 5:
                 playerCards[i].place(relx=1, x=-720 - ((i - 5) * 120), y=350, anchor=NE)
             if i >= 5:
                 playerCards[i].place(relx=1, x=480 - (i * 120), y=100, anchor=NE)
 
-
+        # Places the shop cards
         for i in range(5):
             shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
 
+        # Places the "end round" button
         sceneUpdateButton = tk.Button(window, width=250, height=50, image=textButPT, compound=LEFT, command=endRound)
         sceneUpdateButton.place(relx=1, x=-500, y=620, anchor=NE)
 
+        # Places the background
         backgroundL.grid(row=0, column=0)
         window.mainloop()
 
     def updateCards(self):
+        # Updates card information for each GUI card element
         for i in range(len(cardObjects)):
             if int(cardObjects[i].get_health())<1:
                 boardArray[i]=""
@@ -223,14 +236,16 @@ class displayGUI():
                 playerCards[i].configure(text="", image=CDunknownPT)
 
     def setup(self):
+        # Creates 10 GUI elements when the program starts for the player cards
         for i in range(10):
             if i < 5:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(1, holder))
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(holder))
                 playerCards.append(stringHolder)
             else:
-                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(2, holder))
+                stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(holder))
                 playerCards.append(stringHolder)
 
+        # Creates 5 GUI elements when the program starts for the shop elements
         for i in range(5):
             stringHolder = tk.Button(window, width=290, height=95, command=lambda holder=i: shopBuy(holder))
             shopCards.append(stringHolder)

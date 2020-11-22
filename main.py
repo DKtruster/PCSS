@@ -2,9 +2,7 @@ from gui import displayGUI
 
 
 class main:
-    # SETUP
-
+    # Setups the GUI elements
     displayGUI.setup("")
+    # Runs the game
     displayGUI(True)
-
-

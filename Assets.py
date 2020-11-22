@@ -1,12 +1,11 @@
-import tkinter as tk
-from tkinter import *
-from PIL import Image, ImageTk
+from PIL import Image
 
+# Arrays categorising the different assets
 cardImg = []
 shopImg = []
 assetsImg = []
 
-# LOADING IMAGES
+# Loading images and appending them to their arrays
 bg1 = Image.open("Assets/backgroundBoard3.jpg")
 assetsImg.append(bg1)
 textBut = Image.open("Assets/testButtonTexture.jpg")

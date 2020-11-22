@@ -12,17 +12,14 @@ def serverSend(message):
         s = socket.socket()
         port = 20000
         print("PORT CREATED SERVER_SENDING")
-
         s.bind(('', port))
         print("Socket binded to %s" % (port))
-
         s.listen(5)
         print("SOCKET LISTENING")
         activeSockets.append(s)
 
     while True:
         c, addr = activeSockets[0].accept()
-
         print("Got information from", addr)
         output = message
         c.sendall(output.encode("utf-8"))
@@ -40,16 +37,24 @@ def serverReceive():
     splitMsg = msg.split(' ')
     print ("[CLIENT]:",splitMsg)
 
+    # Server loads the card numbers and sends back the name of the card numbers,
+    # once the server have identifies them in the database
     nameOutputHold = []
 
+    # Creates a new card object for each card the client sends to the server
     for i in range (5):
         strHold = cards.Cards()
         typeHold = str(splitMsg[i])
+        # Initializes the card objects with new data based on the card number
         strHold.searchData(splitMsg[i])
+        # Appends the card name to the array, which is later sent back
         nameOutputHold.append(str(strHold.get_name()))
+        # Appends the card object to a public array, which can be accessed when running the game on the server
         playerCards[0].append(strHold)
         boardArray.append(typeHold)
 
+    # Same content as the previous for-loop, but instead of specific card numbers, they are randomized by the computer
+    # From the players perspective; this is the opponent cards being created
     for i in range (5):
         strHold = cards.Cards()
         typeHold = random.randint(0,10)
@@ -66,6 +71,7 @@ def serverReceive():
     return outputMsg, splitMsg, playerCards
 
 def updatePlayersHP(board):
+    # Functions updates which card objects are alive (more than 0 HP)
     playerOneCount = 0
     playerTwoCount = 0
     playersAlive = [[],[]]
@@ -79,8 +85,7 @@ def updatePlayersHP(board):
             if int(board[1][i].get_health()) > 0:
                 playerTwoCount += 1
                 playersAlive[1].append(i)
-    except AttributeError:
-        print(AttributeError)
+    except AttributeError: print(AttributeError)
 
     return playersAlive, playerOneCount-1, playerTwoCount-1
 
@@ -102,7 +107,6 @@ class gameRun:
                 print("Preparing combat...")
 
                 for x in range(2):
-
                     playersAlive, playerOneCount, playerTwoCount = updatePlayersHP(boardArrayInput)
                     if x == 0 and playerOneCount > 0 and playerTwoCount > 0:
                         for i in range(playerOneCount):
@@ -112,6 +116,7 @@ class gameRun:
                                 if i == 0:
                                     print("\nYOUR TURN")
 
+                                # Gets the attacker's and defender's card information HP and DMG
                                 try: attackCardHP, attackCardDMG = int(playerCards[0][playersAlive[0][i-1]].get_health()), int(playerCards[0][playersAlive[0][i-1]].get_damage())
                                 except IndexError: print("Out of bounds")
                                 try: defendCardHP, defendCardDMG = int(playerCards[1][playersAlive[1][rand]].get_health()), int(playerCards[1][playersAlive[1][rand]].get_damage())
@@ -120,7 +125,6 @@ class gameRun:
                                 print(combatInfo)
                                 serverSend(combatInfo)
 
-                                print("AttackCard HP:",attackCardHP,"DMG:",attackCardDMG,"\nDefendCard HP:",defendCardHP,"DMG:",defendCardDMG)
                                 if int(attackCardDMG) > int(defendCardHP):
                                     serverSend("[YOU] "+str(playerCards[0][playersAlive[x][i-1]].get_name()) + " kills " + str(playerCards[1][rand].get_name()))
                                     print(msgSend)
@@ -129,6 +133,7 @@ class gameRun:
                                     serverSend("[YOU] "+str(playerCards[0][playersAlive[x][i-1]].get_name()) + " dies in an attempt to kill " + playerCards[1][rand].get_name())
                                     print(msgSend)
 
+                                # Update the card objects with new HP based on the opponents damage
                                 try: playerCards[0][playersAlive[0][i-1]].losehp(defendCardDMG)
                                 except IndexError: print("Out of bounds")
                                 try: playerCards[1][playersAlive[1][rand]].losehp(attackCardDMG)
@@ -189,9 +194,9 @@ class gameRun:
 
     while True & counter < 1:
         get = serverSend(msgSend)
-
+        # If the server establishes connection to the client the following code block runs once
         if get & counter < 1:
-            print("Receiving new...")
+            # The array of card objects is being received, which starts the combat
             msgToSend, msgRecv, playerCards = serverReceive()
             print(msgRecv)
             loadCombat("", (playerCards))
