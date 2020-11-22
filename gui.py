@@ -99,41 +99,43 @@ def serverSend(boardArray):
         return True
 
 def moveCard():
+    animationSpeed = 0.04
+    framesPerAnimation = 11
     while len(queueEvents) > 0:
         if queueEvents[0][1]=="Player1":
-            for i in range (11):
+            for i in range (framesPerAnimation):
                 lengthAD = int(queueEvents[0][3])-int(queueEvents[0][5])
-                perMove = (lengthAD*120)/11
+                perMove = (lengthAD*120)/framesPerAnimation
                 defaultCardX = -720-((int(queueEvents[0][3]) - 5) * 120)
                 playerCards[int(queueEvents[0][3])].place(y = 350-(i*8), x=defaultCardX+(i*perMove))
-                time.sleep(0.5)
+                time.sleep(animationSpeed)
                 if i == 10:
                     cardObjects[int(queueEvents[0][3])].losehp(cardObjects[int(queueEvents[0][5])+5].get_damage())
                     cardObjects[int(queueEvents[0][5])+5].losehp(cardObjects[int(queueEvents[0][3])].get_damage())
                     displayGUI.updateCards(self="")
 
-            for i in range (11):
-                playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
+            for i in range (framesPerAnimation):
+                playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(framesPerAnimation*perMove)-(i*perMove))
                 if i == 10:
                     playerCards[int(queueEvents[0][3])].place(y=350, x=defaultCardX)
-                time.sleep(0.5)
+                time.sleep(animationSpeed)
             queueEvents.pop(0)
             return
 
         if queueEvents[0][1]=="Player0":
-            for i in range (11):
+            for i in range (framesPerAnimation):
                 lengthAD = int(queueEvents[0][3]) - int(queueEvents[0][5])
-                perMove = (lengthAD * 120) / 11
+                perMove = (lengthAD * 120) / framesPerAnimation
                 defaultCardX = 480 - ((int(queueEvents[0][3])+5) * 120)
                 playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8), x=defaultCardX+(i*perMove))
-                time.sleep(0.5)
+                time.sleep(animationSpeed)
                 if i == 10:
                     cardObjects[int(queueEvents[0][3])+5].losehp(cardObjects[int(queueEvents[0][5])].get_damage())
                     cardObjects[int(queueEvents[0][5])].losehp(cardObjects[int(queueEvents[0][3])+5].get_damage())
                     displayGUI.updateCards(self="")
-            for i in range (11):
-                playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
-                time.sleep(0.5)
+            for i in range (framesPerAnimation):
+                playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8), x=defaultCardX+(framesPerAnimation*perMove)-(i*perMove))
+                time.sleep(animationSpeed)
                 if i == 10:
                     playerCards[int(queueEvents[0][3])+5].place(y=100, x=defaultCardX)
             queueEvents.pop(0)
@@ -200,6 +202,7 @@ class displayGUI():
                 playerCards[i].place(relx=1, x=-720 - ((i - 5) * 120), y=350, anchor=NE)
             if i >= 5:
                 playerCards[i].place(relx=1, x=480 - (i * 120), y=100, anchor=NE)
+
 
         for i in range(5):
             shopCards[i].place(relx=1, x=-1150, y=110 + (i * 95), anchor=NW)
