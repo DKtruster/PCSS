@@ -5,7 +5,6 @@ import cards
 playerCards = [[],[]]
 boardArray = []
 activeSockets = []
-acceptedSockets = []
 
 def serverSend(message):
     # Next 15 lines made with help from the lecture 7 powerpoint: "Lecture 7: Network Programming", by Jesper Rindom Jensen

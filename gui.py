@@ -57,7 +57,6 @@ def clientServerReceive():
         print("[SYSTEM]: Received enemy board from server")
         for c in range(5,10):
             if (boardArray[c] == ""):
-                cardPlaceStrHold = "cardPlace" + str(c)
                 cardPlaceStrHold = cards.Cards()
                 cardPlaceStrHold.searchData(str(splitMsg[c-4]))
                 playerCards[c].configure(image=Assets.cardImg[int(splitMsg[c-4])])
@@ -101,13 +100,13 @@ def serverSend(boardArray):
 
 def moveCard():
     while len(queueEvents) > 0:
-        if queueEvents[0][1]=="Player0":
+        if queueEvents[0][1]=="Player1":
             for i in range (11):
                 lengthAD = int(queueEvents[0][3])-int(queueEvents[0][5])
                 perMove = (lengthAD*120)/11
                 defaultCardX = -720-((int(queueEvents[0][3]) - 5) * 120)
                 playerCards[int(queueEvents[0][3])].place(y = 350-(i*8), x=defaultCardX+(i*perMove))
-                time.sleep(0.02)
+                time.sleep(0.5)
                 if i == 10:
                     cardObjects[int(queueEvents[0][3])].losehp(cardObjects[int(queueEvents[0][5])+5].get_damage())
                     cardObjects[int(queueEvents[0][5])+5].losehp(cardObjects[int(queueEvents[0][3])].get_damage())
@@ -117,24 +116,24 @@ def moveCard():
                 playerCards[int(queueEvents[0][3])].place(y = 270+(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
                 if i == 10:
                     playerCards[int(queueEvents[0][3])].place(y=350, x=defaultCardX)
-                time.sleep(0.01)
+                time.sleep(0.5)
             queueEvents.pop(0)
             return
 
-        if queueEvents[0][1]=="Player1":
+        if queueEvents[0][1]=="Player0":
             for i in range (11):
                 lengthAD = int(queueEvents[0][3]) - int(queueEvents[0][5])
                 perMove = (lengthAD * 120) / 11
                 defaultCardX = 480 - ((int(queueEvents[0][3])+5) * 120)
                 playerCards[int(queueEvents[0][3])+5].place(y = 100+(i*8), x=defaultCardX+(i*perMove))
-                time.sleep(0.02)
+                time.sleep(0.5)
                 if i == 10:
                     cardObjects[int(queueEvents[0][3])+5].losehp(cardObjects[int(queueEvents[0][5])].get_damage())
                     cardObjects[int(queueEvents[0][5])].losehp(cardObjects[int(queueEvents[0][3])+5].get_damage())
                     displayGUI.updateCards(self="")
             for i in range (11):
                 playerCards[int(queueEvents[0][3])+5].place(y = 188-(i*8), x=defaultCardX+(11*perMove)-(i*perMove))
-                time.sleep(0.01)
+                time.sleep(0.5)
                 if i == 10:
                     playerCards[int(queueEvents[0][3])+5].place(y=100, x=defaultCardX)
             queueEvents.pop(0)
@@ -146,7 +145,6 @@ def shopBuy(shopNumber):
             if shopArray[shopNumber] == i:
                 for c in range(5):
                     if (boardArray[c] == ""):
-                        cardPlaceStrHold = "cardPlace" + str(c)
                         cardPlaceStrHold = cards.Cards()
                         cardPlaceStrHold.searchData(str(i))
                         playerCards[c].configure(image=Assets.cardImg[i])
@@ -213,7 +211,7 @@ class displayGUI():
         window.mainloop()
 
     def updateCards(self):
-        for i in range(len(cardObjects)): # PREV 10
+        for i in range(len(cardObjects)):
             if int(cardObjects[i].get_health())<1:
                 boardArray[i]=""
             if boardArray[i] != "":
@@ -223,8 +221,6 @@ class displayGUI():
 
     def setup(self):
         for i in range(10):
-            stringHolder = "cardHolder" + str(i)
-
             if i < 5:
                 stringHolder = tk.Button(window, width=105, height=185, image=CDunknownPT, fg="white", compound=tk.CENTER, command=lambda holder=i: cardSelect(1, holder))
                 playerCards.append(stringHolder)
@@ -233,7 +229,6 @@ class displayGUI():
                 playerCards.append(stringHolder)
 
         for i in range(5):
-            stringHolder = "ShopCard" + str(i)
             stringHolder = tk.Button(window, width=290, height=95, command=lambda holder=i: shopBuy(holder))
             shopCards.append(stringHolder)
         shopRandom()
