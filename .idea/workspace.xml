@@ -30,7 +30,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AAU-MEDIALOGY-P3/Image Processing/King Domino - Miniprojekt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
@@ -39,7 +39,7 @@
       <recent name="C:\Users\lukad\Documents\GitHub\ProjectPCSS" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.gameRun">
+  <component name="RunManager" selected="Python.main">
     <configuration name="cards" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjectPCSS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -147,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.gameRun" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.gameRun" />
         <item itemvalue="Python.serverClient" />
         <item itemvalue="Python.gui (1)" />
         <item itemvalue="Python.cards" />
@@ -167,67 +167,26 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1603103962947">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1619950130674">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603103962947" />
-    <state width="1515" height="167" key="GridCell.Tab.0.bottom" timestamp="1606050104240">
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1619950130674" />
+    <state width="1515" height="167" key="GridCell.Tab.0.bottom" timestamp="1618606918009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="235" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604336239927" />
-    <state width="1515" height="167" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1606050104240" />
-    <state width="1515" height="167" key="GridCell.Tab.0.center" timestamp="1606050104240">
+    <state width="1515" height="167" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1618606918009" />
+    <state width="1515" height="167" key="GridCell.Tab.0.center" timestamp="1618606918009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="235" key="GridCell.Tab.0.center/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604336239927" />
-    <state width="1515" height="167" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1606050104240" />
-    <state width="1515" height="167" key="GridCell.Tab.0.left" timestamp="1606050104240">
+    <state width="1515" height="167" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1618606918009" />
+    <state width="1515" height="167" key="GridCell.Tab.0.left" timestamp="1618606918009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="235" key="GridCell.Tab.0.left/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604336239927" />
-    <state width="1515" height="167" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1606050104240" />
-    <state width="1515" height="167" key="GridCell.Tab.0.right" timestamp="1606050104240">
+    <state width="1515" height="167" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1618606918009" />
+    <state width="1515" height="167" key="GridCell.Tab.0.right" timestamp="1618606918009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="235" key="GridCell.Tab.0.right/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604336239927" />
-    <state width="1515" height="167" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1606050104240" />
-    <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1605996360332">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604253154690" />
-    <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1605996360332" />
-    <state width="1515" height="277" key="GridCell.Tab.1.center" timestamp="1605996360331">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604253154690" />
-    <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1605996360331" />
-    <state width="1515" height="277" key="GridCell.Tab.1.left" timestamp="1605996360331">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604253154690" />
-    <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1605996360331" />
-    <state width="1515" height="277" key="GridCell.Tab.1.right" timestamp="1605996360332">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604253154690" />
-    <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1605996360332" />
-    <state x="375" y="43" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602942607515">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="375" y="43" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1602942607515" />
-    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606046447609">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1606046447609" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1606049770747">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.-175.1920.1080@0.0.1536.864" timestamp="1604224075706" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1606049770747" />
-    <state x="491" y="344" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602595854141">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="491" y="344" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1536.864@0.0.1536.864" timestamp="1602595854141" />
+    <state width="1515" height="167" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1618606918009" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
